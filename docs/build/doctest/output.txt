@@ -1,0 +1,41 @@
+Results of doctest builder run on 2018-09-07 12:39:19
+=====================================================
+
+Document: api/tabel
+-------------------
+1 items passed all tests:
+  22 tests in default
+22 tests in 1 items.
+22 passed and 0 failed.
+Test passed.
+
+Document: cookbook
+------------------
+1 items passed all tests:
+  83 tests in default
+83 tests in 1 items.
+83 passed and 0 failed.
+Test passed.
+
+Document: performance
+---------------------
+1 items passed all tests:
+  35 tests in default
+35 tests in 1 items.
+35 passed and 0 failed.
+Test passed.
+
+Document: readme
+----------------
+1 items passed all tests:
+  32 tests in default
+32 tests in 1 items.
+32 passed and 0 failed.
+Test passed.
+
+Doctest summary
+===============
+  172 tests
+    0 failures in tests
+    0 failures in setup code
+    0 failures in cleanup code

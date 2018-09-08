@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Performance &mdash; tabel  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Cookbook" href="cookbook.html" />
+    <link rel="prev" title="About Tabel" href="readme.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> tabel
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#install">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#quickstart">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#resources-getting-help">Resources &amp; getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#stable-releases">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#contributing-to-tabel">Contributing to Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#release-todo">Release ToDo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#what-s-in-the-name">What’s in the name?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#todo">ToDo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slicing-tables">slicing tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#appending-rows">appending rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grouping-tables">grouping tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#joining-tables">joining tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tabel</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Performance</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/performance.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="performance">
+<h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
+<p>Tabel is designed for those cases where you have data of multiple types, like
+records in a database, where the volume is small enough to fit it all in memory
+and high freedom of data manipulation is needed. Use Tabel when the following
+conditions are met:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Multiple columns with different datatyes each</li>
+<li>Fields in a row have a shared relation (e.g. records in a database)</li>
+<li>All data fits in memory</li>
+<li>Only few and relatively simple SQL queries are needed</li>
+<li>A large proportion of the data is numeric and would need column-wise
+arithmetic</li>
+<li>Data manipulation requires complex (computed) slicing across both dimensions
+(rows and columns)</li>
+</ul>
+</div></blockquote>
+<p>If the above conditions are not met, consider these alternatives:</p>
+<blockquote>
+<div><ul class="simple">
+<li>numpy - if your data is purely numerical or when fields in a row have no relation.</li>
+<li>HDF5  - if your data does not fit in memory</li>
+<li>SQLite or MySQL - if you need complex DB queries</li>
+</ul>
+</div></blockquote>
+<p>That said, good general performance is paramount. Here below are some tests to
+give an rough overview of where Tabel stands relative to pandas.</p>
+<p>To do the tests, a few tools are needed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">Tabel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">timeit</span> <span class="k">import</span> <span class="n">default_timer</span>
+</pre></div>
+</div>
+<div class="section" id="slicing-tables">
+<h2>slicing tables<a class="headerlink" href="#slicing-tables" title="Permalink to this headline">¶</a></h2>
+<p>As Tabel is based on numpy, this is where it is good at. I think slicing syntax
+is both clean and fast (about 15x faster than pandas in the below tests).</p>
+<blockquote>
+<div><p>First slicing test is to get a whole row from a large table. The return
+value should be a tuple from Tabel, pandas produces an object array which I
+believe is not very efficient as columns usually have different datatypes.
+Tabel is abut 43x faster in this particular case:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_pandas_slice</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;micro-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_pandas_slice</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>                     
+<span class="go">(130.62096348032355, &#39;micro-sec&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_tabel_slice</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;micro-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel_slice</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>                      
+<span class="go">(3.045091559179127, &#39;micro-sec&#39;)</span>
+</pre></div>
+</div>
+<p>Second slicing test is to get a number of rows from one particular column, the
+return value should be an array. Tabel is abut 15x faster in this case:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_pandas_slice</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;micro-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_pandas_slice</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>                     
+<span class="go">(63.41531826881692, &#39;micro-sec&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_tabel_slice</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;micro-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel_slice</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>                      
+<span class="go">(4.007692479062825, &#39;micro-sec&#39;)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="appending-rows">
+<h2>appending rows<a class="headerlink" href="#appending-rows" title="Permalink to this headline">¶</a></h2>
+<p>I find myself often doing something similar to the following procedure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">large_number</span><span class="p">:</span>                        
+<span class="gp">... </span> <span class="n">row</span> <span class="o">=</span> <span class="n">calculate_something</span><span class="p">()</span>
+<span class="gp">... </span> <span class="n">tabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where “do something” could be reading some tricky formatted ascii file or
+calculating the position of the stars, it doesn’t matter. The point is,
+appending data is never a very efficient thing to do, memory needs to be
+reserved, all values need to be re-evaluated for type setting and then all data
+gets copied over to the new location. Still I prefer this over more efficient
+methods as it keeps my code clean and simple.</p>
+<p>I expect bad performance for both Tabel and pandas, but a simple test shows that
+pandas is doing a bit worse. If we repeatedly add a simple row of two integers
+to a pandas DataFrame we’ll use about 300 micro-second per row:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">Tabel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">timeit</span> <span class="k">import</span> <span class="n">default_timer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;1&#39;</span><span class="p">:[],</span><span class="s1">&#39;2&#39;</span><span class="p">:[]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;1&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;2&#39;</span><span class="p">:[</span><span class="mi">2</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_pandas</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;micro-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_pandas</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>                             
+<span class="go">(299.0699630905874, &#39;micro-sec&#39;)</span>
+</pre></div>
+</div>
+<p>The same exercise with Tabel’s <a class="reference internal" href="api/tabel.html#tabel.Tabel.row_append" title="tabel.Tabel.row_append"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.row_append</span></code></a> method takes only a
+quarter of that time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_tabel</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">tbl</span><span class="o">.</span><span class="n">row_append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span> <span class="s2">&quot;micro-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>                              
+<span class="go">(79.83603572938591, &#39;micro-sec&#39;)</span>
+</pre></div>
+</div>
+<p>Granted, there are very many different scenarios thinkable and there probably
+are scenarios where pandas would outperform Tabel. If you come across one of
+those please let me know and I happily add it here.</p>
+</div>
+<div class="section" id="grouping-tables">
+<h2>grouping tables<a class="headerlink" href="#grouping-tables" title="Permalink to this headline">¶</a></h2>
+<p>A big Tabel with a million rows can be grouped by multiple columns. Both pandas
+and Tabel take a good amount of time on this, but then this is typically done
+once on a an individual Tabel or DataFrame. pandas is about twice as fast as
+Tabel on this simple test, again please let me know if you come across other
+scenarios that have significant different performances.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_pandas_groupby</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_pandas_groupby</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>                         
+<span class="go">(372.4931063130498, &#39;mili-sec&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_tabel_groupby</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">tbl</span><span class="o">.</span><span class="n">group_by</span><span class="p">((</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),[(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)])</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel_groupby</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>                          
+<span class="go">(785.5960309971124, &#39;mili-sec&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="joining-tables">
+<h2>joining tables<a class="headerlink" href="#joining-tables" title="Permalink to this headline">¶</a></h2>
+<p>Two Tabels can be joined together by some common key present in both Tabels. Two
+table with a million rows takes about 1 second to be joined with pandas and 10
+times that with Tabel. See the codeblock below for the specific case tested
+here.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_pandas_join</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">df_1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">lsuffix</span><span class="o">=</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="n">rsuffix</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_pandas_join</span><span class="p">()</span>                              
+<span class="go">(2462.8482228145003, &#39;mili-sec&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl_1</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl_2</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_tabel_join</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">tbl_1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tbl_2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">jointype</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel_join</span><span class="p">()</span>                               
+<span class="go">(24791.613722220063, &#39;mili-sec&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cookbook.html" class="btn btn-neutral float-right" title="Cookbook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="readme.html" class="btn btn-neutral" title="About Tabel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Bastiaan Bergman.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

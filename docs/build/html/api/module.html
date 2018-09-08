@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tabel module &mdash; tabel  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="class Tabel" href="tabel.html" />
+    <link rel="prev" title="API Reference" href="index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tabel
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">About Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#install">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#quickstart">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#resources-getting-help">Resources &amp; getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#stable-releases">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#contributing-to-tabel">Contributing to Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#release-todo">Release ToDo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#what-s-in-the-name">What’s in the name?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#todo">ToDo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tabel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transpose">transpose</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-tabel">read_tabel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#first">first</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tabel.html">class Tabel</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tabel</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>tabel module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/module.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-tabel">
+<span id="tabel-module"></span><h1>tabel module<a class="headerlink" href="#module-tabel" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="transpose">
+<h2>transpose<a class="headerlink" href="#transpose" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tabel.transpose">
+<code class="descclassname">tabel.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>datastruct</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transpose rows and columns.</p>
+<p>Convenience function. Usually DB connectors return data as a list of
+records, Tabel takes and internally stores data as a list of columns (column
+store). This function will transpose the list of records into a list of
+columns without a priori assuming anything about the datatype of each
+individual element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>datastruct</strong> (<em>list</em>) – list or tuple containing lists or tuples with the data for each row.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">transposed datastruct, list containing lists with the data for each
+column.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tabel.T">
+<code class="descclassname">tabel.</code><code class="descname">T</code><span class="sig-paren">(</span><em>datastruct</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience alias for <a class="reference internal" href="#tabel.transpose" title="tabel.transpose"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.transpose</span></code></a>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="read-tabel">
+<h2>read_tabel<a class="headerlink" href="#read-tabel" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tabel.read_tabel">
+<code class="descclassname">tabel.</code><code class="descname">read_tabel</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.read_tabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from disk</p>
+<p>Read data from disk and return a Tabel object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – filename sring, including path and extension.</li>
+<li><strong>fmt</strong> (<em>str</em>) – format specifier, supports: ‘csv’, ‘npz’, ‘gz’.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Tabel object containing the data.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="first">
+<h2>first<a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tabel.first">
+<code class="descclassname">tabel.</code><code class="descname">first</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first element when doing a <a class="reference internal" href="tabel.html#tabel.Tabel.group_by" title="tabel.Tabel.group_by"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.group_by</span></code></a>.</p>
+<dl class="docutils">
+<dt>Arguments :</dt>
+<dd><dl class="first last docutils">
+<dt>array (numpy ndarray) :</dt>
+<dd>numpy 1D array containing the subset of elements</dd>
+</dl>
+</dd>
+<dt>Returns :</dt>
+<dd>The first element of ar</dd>
+<dt>Examples :</dt>
+<dd>See Tabel.group_by for examples</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tabel.html" class="btn btn-neutral float-right" title="class Tabel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Bastiaan Bergman.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

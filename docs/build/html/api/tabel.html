@@ -1,0 +1,859 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>class Tabel &mdash; tabel  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="license" href="../license.html" />
+    <link rel="prev" title="tabel module" href="module.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> tabel
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">About Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#install">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#quickstart">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#resources-getting-help">Resources &amp; getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#stable-releases">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#contributing-to-tabel">Contributing to Tabel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#release-todo">Release ToDo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#what-s-in-the-name">What’s in the name?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html#todo">ToDo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="module.html">tabel module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">class Tabel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getter">getter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setter">setter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#repr">repr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#append">append</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#row-append">row_append</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#join">join</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-by">group_by</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sort">sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#astype">astype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#save">save</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#properties">properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dict">dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shape">shape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#len">len</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dtype">dtype</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#valid">valid</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#class-attributes">class attributes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">license</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tabel</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">API Reference</a> &raquo;</li>
+        
+      <li>class Tabel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/tabel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-tabel">
+<h1>class Tabel<a class="headerlink" href="#class-tabel" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="tabel.Tabel">
+<em class="property">class </em><code class="descclassname">tabel.</code><code class="descname">Tabel</code><span class="sig-paren">(</span><em>datastruct=None</em>, <em>columns=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tabel datastructure</p>
+<p>Data table with rows and columns, rows are numbered columns are named. Each
+column has its own datatype. Data is stored by columns (column store), fixed
+datatype per column, varyiable datatypes from column to column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>datastruct</strong> (<em>object</em>) – list, tuple, ndarray or dict of lists, tuples, ndarrays or elements;
+or a <cite>pandas.DataFrame</cite>. List of columns of data. See <a class="reference internal" href="module.html#tabel.T" title="tabel.T"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code></a> for
+a convenience function to transpose a list of records.</li>
+<li><strong>columns</strong> (<em>list of strings</em>) – Column names, ignored when keys are part of the datastruct (dict and
+<cite>pandas.DataFrame</cite>). Automatic names are generated, if omitted, as
+strings of column number.</li>
+<li><strong>copy</strong> (<em>boolean</em>) – Wether to make a copy of the data or to reference to the current
+memory location (when possible), default: True</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<ol class="arabic simple">
+<li>It is possible to create an empty Tabel instance and later add data
+using the <a class="reference internal" href="#tabel.Tabel.append" title="tabel.Tabel.append"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.append</span></code></a> and/or
+<a class="reference internal" href="#tabel.Tabel.__setitem__" title="tabel.Tabel.__setitem__"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.__setitem__</span></code></a> methods.</li>
+<li>It is possibe to add or manipulate data directly through the instance
+attributes <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.columns</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.data</span></code>. One
+could use the <a class="reference internal" href="#tabel.Tabel.valid" title="tabel.Tabel.valid"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.valid</span></code></a> method to check wether the
+manipulated structure is still valid.</li>
+</ol>
+<ol class="last arabic simple" start="4">
+<li>If one or more (but not all) of the columns contain a single element
+this element is repeated to match the length of the other columns.</li>
+</ol>
+</div>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>To initialize a Tabel, call the constructor with the data in column
+lists:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">Tabel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tabel</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Joe&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="mf">1.82</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span> <span class="p">],</span>
+<span class="gp">... </span>      <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">,</span> <span class="s2">&quot;Married&quot;</span><span class="p">])</span>
+<span class="go"> Name   |   Height |   Married</span>
+<span class="go">--------+----------+-----------</span>
+<span class="go"> John   |     1.82 |         0</span>
+<span class="go"> Joe    |     1.65 |         0</span>
+<span class="go"> Jane   |     2.15 |         1</span>
+<span class="go">3 rows [&#39;&lt;U4&#39;, &#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<div class="section" id="getter">
+<h2>getter<a class="headerlink" href="#getter" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.__getitem__">
+<code class="descclassname">Tabel.</code><code class="descname">__getitem__</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indexing and slicing parts of a Tabel.</p>
+<blockquote>
+<div><p>Slicing and indexing mostly follows Numpy array and Python list
+conventions.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>key (r, c):</dt>
+<dd>r can be a single integer, a boolean array, an integer itereable
+or a slice object. c can be a single integer or string, a
+boolean array, an integer or string itereable or a slice object.</dd>
+<dt>key (int, string) :</dt>
+<dd>When only a single int or string is supplied it is considered to
+point to a whole single column or a whole single row (in that
+order).</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>Depending on key, four different types can be returned.</p>
+<dl class="docutils">
+<dt>element ():</dt>
+<dd>If both the row place and the column place are a single integer
+(or string for the column place), adressing a single element in
+the Tabel, wich could be of any datatype supported by
+Numpy.ndarray.</dd>
+<dt>column (ndarray):</dt>
+<dd>If the column place is a single string or integer, adressing a
+single column and the row place is either abscent or not an
+integer.</dd>
+<dt>row (tuple) :</dt>
+<dd>If the row place is a single integer, adressing a single row and
+the coumn place is either abscent or not a single integer/string.</dd>
+<dt>Tabel (Tabel) :</dt>
+<dd>If a tuple key (r, c) is provided with anything other than an
+integer for the row place and anything other than a single
+integer/string type for the column place.</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p class="last">Returned Tabel objects from slicing are referenced to the original Tabel
+object unless row indexing was with a boolean list/array or the returned
+type was not a Tabel or np.ndarray object. Changes made to the slice
+will be reflected in the original Tabel. Appending or joining Tabels or
+adding/renaming columns will never be reflected in the original Tabel
+object. Use the <cite>py:copy</cite> function to make a full copy of the object.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code> – When a key is referencing an invallid or not existing part of the data.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">   Height |   Married</span>
+<span class="go">----------+-----------</span>
+<span class="go">     1.82 |         0</span>
+<span class="go">     1.65 |         0</span>
+<span class="go">     2.15 |         1</span>
+<span class="go">3 rows [&#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+</pre></div>
+</div>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;John&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span>
+<span class="go">array([&#39;John&#39;, &#39;Joe&#39;, &#39;Jane&#39;], dtype=&#39;&lt;U4&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">(&#39;John&#39;, 1.82, False)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="setter">
+<h2>setter<a class="headerlink" href="#setter" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.__setitem__">
+<code class="descclassname">Tabel.</code><code class="descname">__setitem__</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.__setitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setting a slice of a Tabel</p>
+<p>Setting, like getting, slices mostly follows numpy conventions.
+Specifically the rules for the key are the same as for
+<a class="reference internal" href="#tabel.Tabel.__getitem__" title="tabel.Tabel.__getitem__"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.__getitem__</span></code></a> with the same relation between key and
+expected type for the value. In adition this method can also be used to
+add new columns.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>int</em><em>, </em><em>string</em>) – <p>r can be a single integer, a boolean array, an integer
+itereable or a slice object.</p>
+<p>c can be a single integer or string, a boolean array, an integer
+or string itereable or a slice object.</p>
+<p>To adress a single element in the Tabel object the key should be
+a tuple of (r, c) with r a single integer adressing the row and
+c a single integer or string addressing the column of the
+element to be changed.</p>
+</li>
+<li><strong>key</strong> – When only a single int or string is supplied it is considered to
+point to a whole single column or a whole single row (in that
+order).</li>
+<li><strong>value</strong> (<em>object</em>) – <p>The type the value needs to have depends on the key provided.</p>
+<dl class="docutils">
+<dt>element:</dt>
+<dd>A single element of the same type, or a type convertable to
+the same, as the column targeted as a destination. See
+<a class="reference internal" href="#tabel.Tabel.dtype" title="tabel.Tabel.dtype"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.dtype</span></code></a> to get the type of the columns.</dd>
+<dt>column :</dt>
+<dd>An array or list of elements, each element of of the same
+type, or a type convertable to the same, as the column
+targeted as a destination. If a new column is targeted a
+single element could be provided, in which case it will be
+replicated along all rows.</dd>
+<dt>row :</dt>
+<dd>A tuple of elements, each of the same type or a type
+convertable to the same, as the column targeted as a
+destination. Length of the tuple should match the number of
+columns addressed.</dd>
+<dt>Tabel :</dt>
+<dd>Not currently implemented.</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">nothing, change in-place.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p>When changing a column two syntaxes give approximately the same
+result, with, however, a noteable difference. Using a slice object
+“:” will change all elements of the column with the new element(s)
+provided. If just the colum name is provided, with no indication for row,
+than the whole column is replaced with the column provided.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Joe&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.82</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span> <span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">,</span> <span class="s2">&quot;Married&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[:,</span> <span class="s2">&quot;Name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go">   Name |   Height |   Married</span>
+<span class="go">--------+----------+-----------</span>
+<span class="go">      1 |     1.82 |         0</span>
+<span class="go">      2 |     1.65 |         0</span>
+<span class="go">      3 |     2.15 |         1</span>
+<span class="go">3 rows [&#39;&lt;U4&#39;, &#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go">   Name |   Height |   Married</span>
+<span class="go">--------+----------+-----------</span>
+<span class="go">      1 |     1.82 |         0</span>
+<span class="go">      2 |     1.65 |         0</span>
+<span class="go">      3 |     2.15 |         1</span>
+<span class="go">3 rows [&#39;&lt;i8&#39;, &#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+</pre></div>
+</div>
+<p class="last">Note how in the first case the type of the name column stays “&lt;U8”
+while seccond case the type of the Name column changes to “&lt;i8”.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="repr">
+<h2>repr<a class="headerlink" href="#repr" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.__repr__">
+<code class="descclassname">Tabel.</code><code class="descname">__repr__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pretty print using tabulate.</p>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go"> Name   |   Height |   Married</span>
+<span class="go">--------+----------+-----------</span>
+<span class="go"> John   |     1.82 |         0</span>
+<span class="go"> Joe    |     1.65 |         0</span>
+<span class="go"> Jane   |     2.15 |         1</span>
+<span class="go">3 rows [&#39;&lt;U4&#39;, &#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="append">
+<h2>append<a class="headerlink" href="#append" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.append">
+<code class="descclassname">Tabel.</code><code class="descname">append</code><span class="sig-paren">(</span><em>tbl</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append new Tabel to the current Tabel.</p>
+<p>Append a Tabel or pandas.DataFrame to the end of this Tabel. Each column
+is appended to each column of the instance invoking the method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tbl</strong> (<a class="reference internal" href="#tabel.Tabel" title="tabel.Tabel"><em>Tabel</em></a>) – Tabel with the same columns as the current Tabel, order of
+columns does not need to match. Columns do not need to match if
+the current Tabel has zero length. Besides Tabel onjects
+pandas.DataFrame objects are also allowed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nothing, change in-place.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="row-append">
+<h2>row_append<a class="headerlink" href="#row-append" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.row_append">
+<code class="descclassname">Tabel.</code><code class="descname">row_append</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.row_append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a row reccord at the end of the Tabel.</p>
+<p>Appending a single row at the end of the Tabel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>row</strong> (<em>dict</em><em>, </em><em>list</em><em>, </em><em>tuple</em>) – The row to be appended to the Tabel. If a dict is provided the
+keys should match the column names of the Tabel. If a list or
+tuple is provided the length and order should match the columns
+of the Tabel. columns do not need to match if the current Tabel
+has zero length.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nothing. Change in-place.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="join">
+<h2>join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.join">
+<code class="descclassname">Tabel.</code><code class="descname">join</code><span class="sig-paren">(</span><em>tbl</em>, <em>key</em>, <em>jointype='inner'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join two tables with key or keys</p>
+<p>Joins two tables using the key or list of keys provided, adding the
+collumns of the argument table to the current table. One to one joins
+only.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>tbl</strong> (<a class="reference internal" href="#tabel.Tabel" title="tabel.Tabel"><em>Tabel</em></a>) – The right hand tabel to be joined to the current tabel.</li>
+<li><strong>key</strong> (<em>string</em><em> or </em><em>list</em>) – Name of the column to be used as the key, or columns to be used
+as keys. Both tabels should have a (one) column of the named
+key(s), and the elements of the key columns should have no
+duplicates (one to one joins only)</li>
+<li><strong>jointype</strong> (<em>string</em>) – Type of the join to be performed: <code class="docutils literal notranslate"><span class="pre">inner</span></code>, <code class="docutils literal notranslate"><span class="pre">outer</span></code> or
+<code class="docutils literal notranslate"><span class="pre">leftouter</span></code>. If <code class="docutils literal notranslate"><span class="pre">inner</span></code>, returns the elements common to both
+tabels. If <code class="docutils literal notranslate"><span class="pre">outer</span></code>, returns the common elements as well as the
+elements of the left tabel not in the right tabel and the
+elements of the right tabel not in the left tabel. If
+<code class="docutils literal notranslate"><span class="pre">leftouter</span></code>, returns the common elements and the elements of
+the left tabel not in the right tabel.</li>
+<li><strong>(</strong><strong>)</strong> (<em>kwargs</em>) – kwargs passed on to <cite>numpy.lib.recfunctions.join_by</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing. Tabel is joined in place with the input.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>Join a Tabel into the current Tabel matching on column ‘a’:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl_b</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tbl_b</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go">   a | b   | c</span>
+<span class="go">-----+-----+-----</span>
+<span class="go">   0 | a   | d</span>
+<span class="go">   1 | b   | e</span>
+<span class="go">   2 | a   | d</span>
+<span class="go">   3 | b   | e</span>
+<span class="go">4 rows [&#39;&lt;i8&#39;, &#39;&lt;U1&#39;, &#39;&lt;U1&#39;]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="group-by">
+<h2>group_by<a class="headerlink" href="#group-by" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.group_by">
+<code class="descclassname">Tabel.</code><code class="descname">group_by</code><span class="sig-paren">(</span><em>group_cols</em>, <em>aggregate_fie_col</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.group_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Groups and aggregates Tabel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>group_cols</strong> (<em>list</em>) – list of string names of the columns to be grouped by.</li>
+<li><strong>aggregate_fie_col</strong> (<em>list</em>) – list of tuples (<cite>function</cite>, <cite>column</cite>) where <cite>function</cite> is the
+function to be applied to aggregate and <cite>column</cite> is the string
+name of the column. <cite>function</cite> should take an 1D array as an
+input and the returned value is treated as a single element.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Tabel object with requested columns</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<p>grouping by ‘a’ and then by ‘b’, agregating with taking the sum of
+‘a’ elements and taking the first ‘c’ element of each group:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="s2">&quot;100&quot;</span><span class="p">,</span> <span class="s2">&quot;200&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">first</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="o">.</span><span class="n">group_by</span><span class="p">([</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="p">[</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)])</span>
+<span class="go">   b |   a |   a_sum |   c_first</span>
+<span class="go">-----+-----+---------+-----------</span>
+<span class="go"> 100 |  10 |      30 |       100</span>
+<span class="go"> 100 |  20 |       0 |</span>
+<span class="go"> 100 |  30 |      90 |       100</span>
+<span class="go"> 100 |  40 |       0 |</span>
+<span class="go"> 200 |  10 |       0 |</span>
+<span class="go"> 200 |  20 |      60 |       200</span>
+<span class="go"> 200 |  30 |       0 |</span>
+<span class="go"> 200 |  40 |     120 |       200</span>
+<span class="go">8 rows [&#39;&lt;U3&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;, &#39;|O&#39;]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="sort">
+<h2>sort<a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.sort">
+<code class="descclassname">Tabel.</code><code class="descname">sort</code><span class="sig-paren">(</span><em>columns</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort the Tabel.</p>
+<p>Sorting in-place the Tabel according to columns provided. Rows always stay together,
+just the order of rows is affectd.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>columns</strong> (<em>string</em><em> or </em><em>list</em>) – column name or column names to be sorted, listed in-order.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nothing. Sorting in-place.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-examples admonition">
+<p class="first admonition-title">Examples</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go"> a   |   b</span>
+<span class="go">-----+-----</span>
+<span class="go"> b   |   0</span>
+<span class="go"> d   |   2</span>
+<span class="go"> g   |   1</span>
+<span class="go">3 rows [&#39;&lt;U1&#39;, &#39;&lt;i8&#39;]</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="astype">
+<h2>astype<a class="headerlink" href="#astype" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.astype">
+<code class="descclassname">Tabel.</code><code class="descname">astype</code><span class="sig-paren">(</span><em>dtypes</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.astype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a type-converted tabel.</p>
+<p>Converts the tabel according to the provided list of dtypes and returns
+a new Tabel instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dtypes</strong> (<em>list</em>) – list of valid numpy dtypes in the order of the columns. List
+should have same length as number of columns present (see
+<cite>Tabel.shape</cite>) See Tabel.dtype for the current types of the
+Tabel.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Tabel object with the columns converted to the new dtype.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="save">
+<h2>save<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.save">
+<code class="descclassname">Tabel.</code><code class="descname">save</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save to file</p>
+<p>Saves the Tabel data including a header with the column names to a file
+of the specified name in the current directory or the directory
+specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<em>str</em>) – filename, should include path</li>
+<li><strong>fmt</strong> (<em>str</em>) – <p>formatting, valid values are: ‘auto’, ‘csv’, ‘npz’, ‘gz’</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">auto</span></code> :</dt>
+<dd>Determine the filetype from the fiel extension.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">csv</span></code> :</dt>
+<dd>Write to csv file using pythons <cite>csv</cite> module.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">gz</span></code> :</dt>
+<dd>Write to csv using pythons <cite>csv</cite> module and zip using
+standard <cite>gzip</cite> module.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">npz</span></code> :</dt>
+<dd>Write to compressed <cite>numpy</cite> native binary format.</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="properties">
+<h2>properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dict">
+<h3>dict<a class="headerlink" href="#dict" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="tabel.Tabel.dict">
+<code class="descclassname">Tabel.</code><code class="descname">dict</code><a class="headerlink" href="#tabel.Tabel.dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dump all data as a dict of columns.</p>
+<p>Keywords are the column names and values are the column Numpy.ndarrays.
+Usefull when transferring to a pandas DataFrame.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="shape">
+<h3>shape<a class="headerlink" href="#shape" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="tabel.Tabel.shape">
+<code class="descclassname">Tabel.</code><code class="descname">shape</code><a class="headerlink" href="#tabel.Tabel.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tabel shape.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">tuple (r, c) with r the number of rows and c the number of columns.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="len">
+<h3>len<a class="headerlink" href="#len" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="tabel.Tabel.__len__">
+<code class="descclassname">Tabel.</code><code class="descname">__len__</code><em class="property"> = &lt;function Tabel.__len__&gt;</em><a class="headerlink" href="#tabel.Tabel.__len__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="dtype">
+<h3>dtype<a class="headerlink" href="#dtype" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="tabel.Tabel.dtype">
+<code class="descclassname">Tabel.</code><code class="descname">dtype</code><a class="headerlink" href="#tabel.Tabel.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of dtypes of the data columns.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="valid">
+<h3>valid<a class="headerlink" href="#valid" title="Permalink to this headline">¶</a></h3>
+<dl class="attribute">
+<dt id="tabel.Tabel.valid">
+<code class="descclassname">Tabel.</code><code class="descname">valid</code><a class="headerlink" href="#tabel.Tabel.valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check wether the current datastructure is legit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(bool) True if the Tabel internal structure is valid.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p class="last">This is currently checking for the length of the columns to be the
+same and the number of the columns to be the same as the number of
+column names.</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="class-attributes">
+<h2>class attributes<a class="headerlink" href="#class-attributes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="attribute">
+<dt id="tabel.Tabel.repr_layout">
+<code class="descclassname">Tabel.</code><code class="descname">repr_layout</code><em class="property"> = 'presto'</em><a class="headerlink" href="#tabel.Tabel.repr_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string</em> – The layout used with <cite>tabulate</cite> in the <a class="reference internal" href="#tabel.Tabel.__repr__" title="tabel.Tabel.__repr__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__repr__()</span></code></a> method.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tabel.Tabel.max_repr_rows">
+<code class="descclassname">Tabel.</code><code class="descname">max_repr_rows</code><em class="property"> = 20</em><a class="headerlink" href="#tabel.Tabel.max_repr_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>int</em> – Maximum number of rows to show when <a class="reference internal" href="#tabel.Tabel.__repr__" title="tabel.Tabel.__repr__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__repr__()</span></code></a> is invoked.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tabel.Tabel.join_fill_value">
+<code class="descclassname">Tabel.</code><code class="descname">join_fill_value</code><em class="property"> = {'float': nan, 'integer': 999999, 'string': ''}</em><a class="headerlink" href="#tabel.Tabel.join_fill_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em> – Fill vallues to be used when doing outer joins</p>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../license.html" class="btn btn-neutral float-right" title="license" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="module.html" class="btn btn-neutral" title="tabel module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Bastiaan Bergman.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
