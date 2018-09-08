@@ -277,14 +277,6 @@ Contributors
 Just me, Bastiaan Bergman [Bastiaan.Bergman@gmail.com].
 
 
-Release ToDo
-============
-
-* Make it pip/conda installable
-
-* cleanup tabel.ipynb
-
-
 What's in the name?
 ===================
 
