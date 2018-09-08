@@ -33,7 +33,7 @@ basic table tools.
 Install
 ========
 
-
+pip install tabel
 
 Quickstart
 ===========
