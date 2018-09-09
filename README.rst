@@ -56,11 +56,9 @@ To setup a Tabel:
 3 rows ['<U4', '<f8', '|b1']
 
 Alternatively, Tabels can be setup from dictionaries, numpy arrays, pandas
-DataFrames and even single values, or no data at all. See the
-:ref:`Initialization` for more examples. Database connectors usually return data
-as a list of records, the module provides a convenience function to transpose
-this into a list of columns :py:mod:`tabel.T`. Finally, data can be red from file:
-:ref:`Reading`.
+DataFrames, or no data at all. Database connectors usually return data as a list
+of records, the module provides a convenience function to transpose this into a
+list of columns.
 
 slice
 -----
@@ -82,7 +80,6 @@ Unless when,..
 array(['Joe', 'Jane'],
       dtype='<U4')
 
-
 2. explicitly one row is requested, a tuple is returned:
 
 >>> tbl[0,:]
@@ -95,7 +92,7 @@ array(['Joe', 'Jane'],
 
 In general, slicing is intuitive and does not deviate from what would expect
 from numpy. With the one addition that columns can be referred to by names as
-well as numbers. There is more examples in :ref:`Slicing`.
+well as numbers.
 
 set
 ----
@@ -113,7 +110,7 @@ Setting elements works the same as slicing:
 3 rows ['<U4', '<f8', '|b1']
 
 The datatype that the value is expected to have, is the same as the datatype a
-slice would result into. See more examples in :ref:`Setting`
+slice would result into.
 
 Adding columns, works the same as setting elements, just give it a new name:
 
@@ -140,7 +137,7 @@ Or set the whole column to the same value:
 3 rows ['<U4', '<f8', '|b1', '<i8']
 
 Just like numpy, slices are not actual copies of the data, rather they are
-references. See :ref:`Referencing` for details.
+references.
 
 append Tabel and row
 ---------------------
@@ -173,7 +170,6 @@ Or append rows as dictionary:
  Jack   |     1.81 |         1
 4 rows ['<U4', '<f8', '|b1']
 
-See :ref:`Appending` for more examples.
 
 instance properties
 --------------------
@@ -194,8 +190,6 @@ Further the basic means to asses the size of your data:
 (3, 3)
 >>> len(tbl)
 3
-
-See :mod:`tabel.Tabel` for more details on the available properties.
 
 pandas
 -------
@@ -235,7 +229,7 @@ The dict property of Tabel provides a way to make a DataFrame from a Tabel:
 Resources & getting help
 ==========================
 
-* See for the full API and more examples the documentation on `RTD <>`_.
+* See for the full API and more examples the documentation on RTD.
 * The repository on bitbucket
 * Installables on pip
 * Questions and answers on `StackOverflow <https://stackoverflow.com/>`_, I
@@ -300,14 +294,11 @@ ToDo
 * cashe buffers for faster appending: store temp in list and concatenate to
   array only once we use another method
 * allow for (sparse) numpy arrays as an element
-* adjust & limit __repr__ width in jupyter cell
-* add plugins on readme page (https://github.com/AtomLinter/linter-pylint/blob/master/README.md)
+* adjust & limit __repr__ width for very wide Tabels in Jupyter cell
 * items() and row_items() and keys() and values() method
 * pop_column method
 * tox - environment testing
 * set subsets of tabels with (subsets) of other tabels, seems logic as __setitem__ is
   allowed to provide the datatype that should have come from a __getitem__
 * datetime column support
-* read Tabel, column order for npz files not preserved (certainly on py2, possibly on py3)
-* type conversion for columns containing numbers and empty strings when reading csv
 * add disk datalogger

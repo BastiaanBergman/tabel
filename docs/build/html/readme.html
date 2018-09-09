@@ -96,10 +96,12 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#resources-getting-help">Resources &amp; getting help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#stable-releases">Stable releases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#dependencies">Dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tested-on">Tested on:</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="#contributing-to-tabel">Contributing to Tabel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#contributors">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#release-todo">Release ToDo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#what-s-in-the-name">What’s in the name?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#todo">ToDo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -178,8 +180,7 @@ numbers. Indexing and slicing your data is analogous to numpy array’s. The
 only real difference is that each column can have its own data type.</p>
 <div class="section" id="design-objectives">
 <h2>Design objectives<a class="headerlink" href="#design-objectives" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>I got frustrated with pandas: it’s complicated slicing syntax (.loc, .x,
+<p>I got frustrated with pandas: it’s complicated slicing syntax (.loc, .x,
 .iloc, .. etc), it’s enforced index column and the Series objects I get when I
 want a numpy array. With Tabel I created the simplified pandas I need for many
 of my data-jobs. Just focussing on simple slicing of multi-datatype tables and
@@ -193,11 +194,11 @@ and future support.</li>
 is up to the user.</li>
 <li>Fundamental necessities for sorting, grouping, joining and appending tables.</li>
 </ul>
-</div></blockquote>
 </div>
 </div>
 <div class="section" id="install">
 <h1>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h1>
+<p>pip install tabel</p>
 </div>
 <div class="section" id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
@@ -218,11 +219,9 @@ is up to the user.</li>
 </pre></div>
 </div>
 <p>Alternatively, Tabels can be setup from dictionaries, numpy arrays, pandas
-DataFrames and even single values, or no data at all. See the
-<a class="reference internal" href="cookbook.html#initialization"><span class="std std-ref">Initialization</span></a> for more examples. Database connectors usually return data
-as a list of records, the module provides a convenience function to transpose
-this into a list of columns <a class="reference internal" href="api/module.html#tabel.T" title="tabel.T"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code></a>. Finally, data can be red from file:
-<a class="reference internal" href="cookbook.html#reading"><span class="std std-ref">Reading</span></a>.</p>
+DataFrames, or no data at all. Database connectors usually return data as a list
+of records, the module provides a convenience function to transpose this into a
+list of columns.</p>
 </div>
 <div class="section" id="slice">
 <h2>slice<a class="headerlink" href="#slice" title="Permalink to this headline">¶</a></h2>
@@ -236,8 +235,7 @@ this into a list of columns <a class="reference internal" href="api/module.html#
 </pre></div>
 </div>
 <p>Unless when,..</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li>explicitly one column is requested, a numpy array is returned:</li>
 </ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span>       
@@ -259,10 +257,9 @@ this into a list of columns <a class="reference internal" href="api/module.html#
 <span class="go">&#39;John&#39;</span>
 </pre></div>
 </div>
-</div></blockquote>
 <p>In general, slicing is intuitive and does not deviate from what would expect
 from numpy. With the one addition that columns can be referred to by names as
-well as numbers. There is more examples in <a class="reference internal" href="cookbook.html#slicing"><span class="std std-ref">Slicing</span></a>.</p>
+well as numbers.</p>
 </div>
 <div class="section" id="set">
 <h2>set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h2>
@@ -279,7 +276,7 @@ well as numbers. There is more examples in <a class="reference internal" href="c
 </pre></div>
 </div>
 <p>The datatype that the value is expected to have, is the same as the datatype a
-slice would result into. See more examples in <a class="reference internal" href="cookbook.html#setting"><span class="std std-ref">Setting</span></a></p>
+slice would result into.</p>
 <p>Adding columns, works the same as setting elements, just give it a new name:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Joe&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span> <span class="s1">&#39;Height&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">1.82</span><span class="p">,</span><span class="mf">1.65</span><span class="p">,</span><span class="mf">2.15</span><span class="p">],</span> <span class="s1">&#39;Married&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="p">[</span><span class="s1">&#39;new&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
@@ -305,7 +302,7 @@ slice would result into. See more examples in <a class="reference internal" href
 </pre></div>
 </div>
 <p>Just like numpy, slices are not actual copies of the data, rather they are
-references. See <a class="reference internal" href="cookbook.html#referencing"><span class="std std-ref">Referencing</span></a> for details.</p>
+references.</p>
 </div>
 <div class="section" id="append-tabel-and-row">
 <h2>append Tabel and row<a class="headerlink" href="#append-tabel-and-row" title="Permalink to this headline">¶</a></h2>
@@ -337,7 +334,6 @@ references. See <a class="reference internal" href="cookbook.html#referencing"><
 <span class="go">4 rows [&#39;&lt;U4&#39;, &#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="cookbook.html#appending"><span class="std std-ref">Appending</span></a> for more examples.</p>
 </div>
 <div class="section" id="instance-properties">
 <h2>instance properties<a class="headerlink" href="#instance-properties" title="Permalink to this headline">¶</a></h2>
@@ -358,7 +354,6 @@ manipulated like that (just don’t make a mess):</p>
 <span class="go">3</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="api/tabel.html#tabel.Tabel" title="tabel.Tabel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel</span></code></a> for more details on the available properties.</p>
 </div>
 <div class="section" id="pandas">
 <h2>pandas<a class="headerlink" href="#pandas" title="Permalink to this headline">¶</a></h2>
@@ -387,7 +382,7 @@ is easy:</p>
 <p>The dict property of Tabel provides a way to make a DataFrame from a Tabel:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tbl</span><span class="o">.</span><span class="n">dict</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">   a   b</span>
+<span class="go">  a   b</span>
 <span class="go">0  0  10</span>
 <span class="go">1  1  11</span>
 <span class="go">2  2  12</span>
@@ -397,19 +392,23 @@ is easy:</p>
 </div>
 <div class="section" id="resources-getting-help">
 <h1>Resources &amp; getting help<a class="headerlink" href="#resources-getting-help" title="Permalink to this headline">¶</a></h1>
-<blockquote>
-<div><ul class="simple">
-<li>See for the full API and more examples the documentation on <a href="#id1"><span class="problematic" id="id2">`RTD &lt;&gt;`_</span></a>.</li>
+<ul class="simple">
+<li>See for the full API and more examples the documentation on RTD.</li>
 <li>The repository on bitbucket</li>
 <li>Installables on pip</li>
 <li>Questions and answers on <a class="reference external" href="https://stackoverflow.com/">StackOverflow</a>, I
 will try to monitor for it.</li>
 </ul>
-</div></blockquote>
 </div>
 <div class="section" id="stable-releases">
 <h1>Stable releases<a class="headerlink" href="#stable-releases" title="Permalink to this headline">¶</a></h1>
-<p>None yet</p>
+<ul class="simple">
+<li>tabel 1.0.0<ul>
+<li>First release</li>
+<li>September 8, 2018</li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section" id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
@@ -423,14 +422,13 @@ will try to monitor for it.</li>
 <li>gzip (optional, for zipping csv files)</li>
 <li>pandas (optional, for converting back and forth to DataFrames)</li>
 </ul>
-<dl class="docutils">
-<dt>Tested on:</dt>
-<dd><ul class="first last simple">
+<div class="section" id="tested-on">
+<h2>Tested on:<a class="headerlink" href="#tested-on" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
 <li>Python 2.7.14; numpy 1.14.0</li>
 <li>Python 3.6.4;  numpy 1.14.3</li>
 </ul>
-</dd>
-</dl>
+</div>
 </div>
 <div class="section" id="contributing-to-tabel">
 <h1>Contributing to Tabel<a class="headerlink" href="#contributing-to-tabel" title="Permalink to this headline">¶</a></h1>
@@ -441,13 +439,6 @@ will try to monitor for it.</li>
 <div class="section" id="contributors">
 <h1>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h1>
 <p>Just me, Bastiaan Bergman [<a class="reference external" href="mailto:Bastiaan&#46;Bergman&#37;&#52;&#48;gmail&#46;com">Bastiaan<span>&#46;</span>Bergman<span>&#64;</span>gmail<span>&#46;</span>com</a>].</p>
-</div>
-<div class="section" id="release-todo">
-<h1>Release ToDo<a class="headerlink" href="#release-todo" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>Make it pip/conda installable</li>
-<li>cleanup tabel.ipynb</li>
-</ul>
 </div>
 <div class="section" id="what-s-in-the-name">
 <h1>What’s in the name?<a class="headerlink" href="#what-s-in-the-name" title="Permalink to this headline">¶</a></h1>
@@ -463,16 +454,13 @@ is old fashioned as well.</p>
 <li>cashe buffers for faster appending: store temp in list and concatenate to
 array only once we use another method</li>
 <li>allow for (sparse) numpy arrays as an element</li>
-<li>adjust &amp; limit __repr__ width in jupyter cell</li>
-<li>add plugins on readme page (<a class="reference external" href="https://github.com/AtomLinter/linter-pylint/blob/master/README.md">https://github.com/AtomLinter/linter-pylint/blob/master/README.md</a>)</li>
+<li>adjust &amp; limit __repr__ width for very wide Tabels in Jupyter cell</li>
 <li>items() and row_items() and keys() and values() method</li>
 <li>pop_column method</li>
 <li>tox - environment testing</li>
 <li>set subsets of tabels with (subsets) of other tabels, seems logic as __setitem__ is
 allowed to provide the datatype that should have come from a __getitem__</li>
 <li>datetime column support</li>
-<li>read Tabel, column order for npz files not preserved (certainly on py2, possibly on py3)</li>
-<li>type conversion for columns containing numbers and empty strings when reading csv</li>
 <li>add disk datalogger</li>
 </ul>
 </div>

@@ -1,16 +1,16 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="tabel",
-    version="1.0.0",
+    version="1.0.2",
     author="Bastiaan Bergman",
     author_email="Bastiaan.Bergman@gmail.com",
     description="Lightweight, intuitive and fast data-tables.",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://github.com/pypa/tabel",
     packages=setuptools.find_packages(),
     classifiers=[
