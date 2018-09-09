@@ -229,9 +229,9 @@ The dict property of Tabel provides a way to make a DataFrame from a Tabel:
 Resources & getting help
 ==========================
 
-* See for the full API and more examples the documentation on RTD.
-* The repository on bitbucket
-* Installables on pip
+* See for the full API and more examples the documentation on `RTD <https://tabel.readthedocs.io/en/stable/>`_.
+* The repository on `Github <https://github.com/BastiaanBergman/tabel>`_.
+* Installables on `pip <https://pypi.org/project/tabel/>`_.
 * Questions and answers on `StackOverflow <https://stackoverflow.com/>`_, I
   will try to monitor for it.
 

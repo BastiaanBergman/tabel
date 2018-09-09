@@ -11,7 +11,7 @@ setuptools.setup(
     description="Lightweight, intuitive and fast data-tables.",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    url="https://github.com/pypa/tabel",
+    url="https://github.com/BastiaanBergman/tabel",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -21,4 +21,8 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    project_urls={
+        "Documentation": "https://tabel.readthedocs.io/en/stable/",
+        "Source Code": "https://github.com/BastiaanBergman/tabel",
+    }
 )
