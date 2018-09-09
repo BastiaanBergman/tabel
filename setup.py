@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="tabel",
-    version="1.0.2",
+    version="1.0.3",
     author="Bastiaan Bergman",
     author_email="Bastiaan.Bergman@gmail.com",
     description="Lightweight, intuitive and fast data-tables.",
