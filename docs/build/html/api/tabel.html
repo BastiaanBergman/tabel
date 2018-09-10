@@ -188,8 +188,8 @@
   <div class="section" id="class-tabel">
 <h1>class Tabel<a class="headerlink" href="#class-tabel" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="tabel.Tabel">
-<em class="property">class </em><code class="descclassname">tabel.</code><code class="descname">Tabel</code><span class="sig-paren">(</span><em>datastruct=None</em>, <em>columns=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel" title="Permalink to this definition">¶</a></dt>
+<dt id="tabel.tabel.Tabel">
+<em class="property">class </em><code class="descclassname">tabel.tabel.</code><code class="descname">Tabel</code><span class="sig-paren">(</span><em>datastruct=None</em>, <em>columns=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.tabel.Tabel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tabel datastructure</p>
 <p>Data table with rows and columns, rows are numbered columns are named. Each
 column has its own datatype. Data is stored by columns (column store), fixed
@@ -200,7 +200,7 @@ datatype per column, varyiable datatypes from column to column.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>datastruct</strong> (<em>object</em>) – list, tuple, ndarray or dict of lists, tuples, ndarrays or elements;
-or a <cite>pandas.DataFrame</cite>. List of columns of data. See <a class="reference internal" href="module.html#tabel.T" title="tabel.T"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code></a> for
+or a <cite>pandas.DataFrame</cite>. List of columns of data. See <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code> for
 a convenience function to transpose a list of records.</li>
 <li><strong>columns</strong> (<em>list of strings</em>) – Column names, ignored when keys are part of the datastruct (dict and
 <cite>pandas.DataFrame</cite>). Automatic names are generated, if omitted, as
@@ -456,7 +456,7 @@ is appended to each column of the instance invoking the method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tbl</strong> (<a class="reference internal" href="#tabel.Tabel" title="tabel.Tabel"><em>Tabel</em></a>) – Tabel with the same columns as the current Tabel, order of
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tbl</strong> (<a class="reference internal" href="#tabel.tabel.Tabel" title="tabel.tabel.Tabel"><em>Tabel</em></a>) – Tabel with the same columns as the current Tabel, order of
 columns does not need to match. Columns do not need to match if
 the current Tabel has zero length. Besides Tabel onjects
 pandas.DataFrame objects are also allowed.</td>
@@ -506,7 +506,7 @@ only.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tbl</strong> (<a class="reference internal" href="#tabel.Tabel" title="tabel.Tabel"><em>Tabel</em></a>) – The right hand tabel to be joined to the current tabel.</li>
+<li><strong>tbl</strong> (<a class="reference internal" href="#tabel.tabel.Tabel" title="tabel.tabel.Tabel"><em>Tabel</em></a>) – The right hand tabel to be joined to the current tabel.</li>
 <li><strong>key</strong> (<em>string</em><em> or </em><em>list</em>) – Name of the column to be used as the key, or columns to be used
 as keys. Both tabels should have a (one) column of the named
 key(s), and the elements of the key columns should have no

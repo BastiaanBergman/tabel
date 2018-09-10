@@ -235,7 +235,7 @@ list of columns.</p>
 <span class="go">2 rows [&#39;&lt;U4&#39;, &#39;|b1&#39;]</span>
 </pre></div>
 </div>
-<p>Unless when,..</p>
+<p>Slices will always return a Tabel except in three distinct cases, when:</p>
 <ol class="arabic simple">
 <li>explicitly one column is requested, a numpy array is returned:</li>
 </ol>
@@ -394,7 +394,7 @@ is easy:</p>
 <div class="section" id="resources-getting-help">
 <h1>Resources &amp; getting help<a class="headerlink" href="#resources-getting-help" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>See for the full API and more examples the documentation on <a class="reference external" href="https://tabel.readthedocs.io/en/stable/">RTD</a>.</li>
+<li>See for the full API and more examples the documentation on <a class="reference external" href="https://tabel.readthedocs.io/en/stable/index.html">RTD</a>.</li>
 <li>The repository on <a class="reference external" href="https://github.com/BastiaanBergman/tabel">Github</a>.</li>
 <li>Installables on <a class="reference external" href="https://pypi.org/project/tabel/">pip</a>.</li>
 <li>Questions and answers on <a class="reference external" href="https://stackoverflow.com/">StackOverflow</a>, I
@@ -414,13 +414,8 @@ will try to monitor for it.</li>
 <div class="section" id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>sys</li>
-<li>itertools</li>
 <li>numpy</li>
 <li>tabulate (optional, recommended)</li>
-<li>os (optional, for writing files)</li>
-<li>csv (optional, for writing csv files)</li>
-<li>gzip (optional, for zipping csv files)</li>
 <li>pandas (optional, for converting back and forth to DataFrames)</li>
 </ul>
 <div class="section" id="tested-on">

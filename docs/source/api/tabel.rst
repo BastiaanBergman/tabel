@@ -3,7 +3,7 @@ class Tabel
 
 .. currentmodule: tabel.tabel
 
-.. autoclass:: tabel.Tabel
+.. autoclass:: tabel.tabel.Tabel
 
 getter
 ------
