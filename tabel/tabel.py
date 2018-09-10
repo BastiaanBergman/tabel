@@ -9,12 +9,7 @@ from __future__ import (absolute_import, division, print_function,
 import sys
 from itertools import product
 import numpy as np
-
-try:
-    from numpy.lib.recfunctions import join_by
-except:
-    import warnings                             # pylint: disable=ungrouped-imports
-    warnings.warn("numpy.lib.recfunctions dependencies could not be loaded: {}".format(e))
+from numpy.lib.recfunctions import join_by
 
 if sys.version_info >= (3, 0):
     PV = 3

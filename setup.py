@@ -5,7 +5,8 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="tabel",
-    version="1.0.3",
+    keywords='data table',
+    version="1.0.11",
     author="Bastiaan Bergman",
     author_email="Bastiaan.Bergman@gmail.com",
     description="Lightweight, intuitive and fast data-tables.",
@@ -13,6 +14,9 @@ setuptools.setup(
     long_description_content_type="text/x-rst",
     url="https://github.com/BastiaanBergman/tabel",
     packages=setuptools.find_packages(),
+    license='MIT',
+    python_requires='>=2.6, !=3.0.*, !=3.1.*, !=3.2.*',
+    install_requires=['numpy', 'tabulate'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",

@@ -72,7 +72,7 @@ Slicing can be done the numpy way, always returning Tabel objects:
  Jane   |         1
 2 rows ['<U4', '|b1']
 
-Unless when,..
+Slices will always return a Tabel except in three distinct cases, when:
 
 1. explicitly one column is requested, a numpy array is returned:
 
@@ -229,7 +229,7 @@ The dict property of Tabel provides a way to make a DataFrame from a Tabel:
 Resources & getting help
 ==========================
 
-* See for the full API and more examples the documentation on `RTD <https://tabel.readthedocs.io/en/stable/>`_.
+* See for the full API and more examples the documentation on `RTD <https://tabel.readthedocs.io/en/stable/index.html>`_.
 * The repository on `Github <https://github.com/BastiaanBergman/tabel>`_.
 * Installables on `pip <https://pypi.org/project/tabel/>`_.
 * Questions and answers on `StackOverflow <https://stackoverflow.com/>`_, I
@@ -247,13 +247,8 @@ Stable releases
 Dependencies
 ============
 
-* sys
-* itertools
 * numpy
 * tabulate (optional, recommended)
-* os (optional, for writing files)
-* csv (optional, for writing csv files)
-* gzip (optional, for zipping csv files)
 * pandas (optional, for converting back and forth to DataFrames)
 
 Tested on:
