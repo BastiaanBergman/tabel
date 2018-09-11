@@ -36,9 +36,9 @@ copyright = '2018, Bastiaan Bergman'
 author = 'Bastiaan Bergman'
 
 # The short X.Y version
-version = 'v1.0.0'
+version = 'v1.0'
 # The full version, including alpha/beta/rc tags
-release = 'v1.0.0'
+release = 'v1.0'
 
 
 
