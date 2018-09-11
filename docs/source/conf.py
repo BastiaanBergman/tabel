@@ -17,11 +17,11 @@ import sys
 # sys.path.insert(0, os.path.abspath('../../'))
 # sys.path.insert(0, os.path.abspath('../../tabel'))
 # sys.path.insert(0, os.path.abspath('.'))
-# sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../'))
 # sys.path.insert(0, os.path.abspath('../tabel'))
 # APP_DIR = os.path.normpath(os.path.join(os.getcwd(), '../..'))
 # sys.path.insert(0, APP_DIR)
-sys.path.append(os.path.abspath('../tabel'))
+# sys.path.insert(0, os.path.abspath('../tabel'))
 
 # import mock
 #
@@ -36,9 +36,9 @@ copyright = '2018, Bastiaan Bergman'
 author = 'Bastiaan Bergman'
 
 # The short X.Y version
-version = ''
+version = 'v1.0.0'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = 'v1.0.0'
 
 
 
