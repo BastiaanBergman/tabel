@@ -15,7 +15,7 @@ setuptools.setup(
     url="https://github.com/BastiaanBergman/tabel",
     packages=setuptools.find_packages(),
     license='MIT',
-    python_requires='>=2.6, !=3.0.*, !=3.1.*, !=3.2.*',
+    python_requires='>=2.6, >=3.0',
     install_requires=['numpy', 'tabulate'],
     classifiers=[
         "Programming Language :: Python :: 3",
