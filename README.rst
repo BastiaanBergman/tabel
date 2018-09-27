@@ -275,9 +275,9 @@ I'm using pytest, pylint, doctest and sphynx.
  - pytest ::
 
     cd tabel/test
-    conda activate py36_180417
+    conda activate py3_6
     pytest
-    conda activate py27_180412
+    conda activate py2_7
     pytest
 
  - pylint ::
