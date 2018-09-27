@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.rst
+setup.py
+tabel/__init__.py
+tabel/hashjoin.py
+tabel/numpy_types.py
+tabel/tabel.py
+tabel/util.py
+tabel.egg-info/PKG-INFO
+tabel.egg-info/SOURCES.txt
+tabel.egg-info/dependency_links.txt
+tabel.egg-info/requires.txt
+tabel.egg-info/top_level.txt
+test/test_tabel.py
