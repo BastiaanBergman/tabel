@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: tabel
-Version: 1.1.0
+Version: 1.1.1
 Summary: Lightweight, intuitive and fast data-tables.
 Home-page: https://github.com/BastiaanBergman/tabel
 Author: Bastiaan Bergman
@@ -305,6 +305,10 @@ Description: About Tabel
             cd tabel/docs
             make html
         
+         - setuptools/pypi ::
+        
+            python setup.py sdist bdist_wheel
+            twine upload dist/tabel-1.1.0.*
         
         
         Contributors
