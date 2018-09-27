@@ -19,7 +19,7 @@ If the above conditions are not met, consider these alternatives:
 
     * numpy - if your data is purely numerical or when fields in a row have no relation.
     * HDF5  - if your data does not fit in memory
-    * SQLite or MySQL - if you need complex DB queries
+    * SQLite or MySQL - if you need complex DB queries (e.g. transactional)
 
 That said, good general performance is paramount. Here below are some tests to
 give an rough overview of where Tabel stands relative to pandas.
@@ -89,7 +89,7 @@ I find myself often doing something similar to the following procedure:
 
     >>> for i in large_number:                        # doctest: +SKIP
     ...  row = calculate_something()
-    ...  tabel.append(row)
+    ...  tbl.append(row)
 
 where "do something" could be reading some tricky formatted ascii file or
 calculating the position of the stars, it doesn't matter. The point is,
@@ -138,11 +138,11 @@ grouping tables
 
 A big Tabel with a million rows can be grouped by multiple columns. Both pandas
 and Tabel take a good amount of time on this, but then this is typically done
-once on a an individual Tabel or DataFrame. pandas is about twice as fast as
-Tabel on this simple test, again please let me know if you come across other
-scenarios that have significant different performances.
+once on a an individual Tabel or DataFrame. pandas is about 10x faster than
+Tabel on this simple test. The good news is that this is independent of n,
+meaning they're both equally scalable.
 
-    >>> n = 1000000
+    >>> n = 100000
     >>> data_dict = {'a':[1,2,3,4] * n, 'b':['a1','a2']*2*n, 'c':np.arange(4*n)}
     >>> df = pd.DataFrame(data_dict)
     >>> def test_pandas_groupby(n):
@@ -151,7 +151,7 @@ scenarios that have significant different performances.
     ...         _ = df.groupby(('a', 'b')).sum()
     ...     return (default_timer() - t0)/n*1e3, "mili-sec"
     >>> test_pandas_groupby(10)                         # doctest: +SKIP
-    (372.4931063130498, 'mili-sec')
+    (34.32465291116387, 'mili-sec')
     >>> tbl = Tabel(data_dict)
     >>> def test_tabel_groupby(n):
     ...     t0 = default_timer()
@@ -159,16 +159,16 @@ scenarios that have significant different performances.
     ...         _ = tbl.group_by(('b', 'a'),[(np.sum, 'c')])
     ...     return (default_timer() - t0)/n*1e3, "mili-sec"
     >>> test_tabel_groupby(10)                          # doctest: +SKIP
-    (785.5960309971124, 'mili-sec')
+    (322.54316059406847, 'mili-sec')
 
 
 joining tables
 --------------
 
 Two Tabels can be joined together by some common key present in both Tabels. Two
-table with a million rows takes about 1 second to be joined with pandas and 10
-times that with Tabel. See the codeblock below for the specific case tested
-here.
+table with a million rows takes about 2.5 second to be joined with pandas and 5
+times that with Tabel, this ratio reduces somewhat with n. See the codeblock
+below for the specific case tested here.
 
     >>> n = 1000000
     >>> data_dict = {'a':[1,2,3,4] * n, 'b':['a1','a2']*2*n, 'c':np.arange(4*n)}
@@ -187,4 +187,4 @@ here.
     ...     _ = tbl_1.join(tbl_2, key='c', jointype='inner')
     ...     return (default_timer() - t0)*1e3, "mili-sec"
     >>> test_tabel_join()                               # doctest: +SKIP
-    (24791.613722220063, 'mili-sec')
+    (10393.40596087277, 'mili-sec')

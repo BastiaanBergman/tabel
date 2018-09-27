@@ -1,4 +1,9 @@
-from tabel.tabel import Tabel, read_tabel, T, first
+import sys
+import os
+local_path = os.path.abspath(os.path.join(os.getcwd(), "../"))
+sys.path.insert(0,local_path)
+
+from tabel import Tabel, read_tabel, T, first
 import os
 import pytest
 import numpy as np
@@ -202,7 +207,13 @@ class TestGroupBy(object):
     def test_group_by(self):
         tbl = Tabel({'a':[10,20,30, 40]*3, 'b':["100","200"]*6, 'c':[100,200]*6})
         tbl_g = tbl.group_by(['b','a'], [(np.sum, 'a'), (first, 'c')])
-        assert np.all(tbl_g['a_sum'] == np.array([30, 0, 90, 0, 0, 60, 0, 120]))
+        idx = np.argsort(tbl_g['a_sum'])
+        assert np.all(tbl_g[idx, 'a_sum'] == np.array([30, 60, 90, 120]))
+        assert np.all(tbl['a'] == [10,20,30, 40]*3)
+        assert np.all(tbl_g[idx, 'c_first'] == np.array([100, 200, 100, 200]))
+        tbl_g = tbl.group_by(['b','a'], [])
+        idx = np.argsort(tbl_g['a'])
+        assert np.all(tbl_g[idx, 'a'] == [10,20,30,40])
 
 
 class TestShapeNLen(object):
@@ -240,28 +251,30 @@ class TestJoin(object):
     def test_inner_int_join(self):
         tbl = Tabel({"a":list(range(4)), "b": ['a','b'] *2})
         tbl_b = Tabel({"a":list(range(2,6)), "c": ['d','e'] *2})
-        tbl.join(tbl_b, "a")
-        assert "c" in tbl.columns
-        assert tbl[0] == (2,'a','d')
-        assert len(tbl) == 2
-
+        tbl_j = tbl.join(tbl_b, "a")
+        assert "c_r" in tbl_j.columns
+        assert tbl_j[0] == (2,'a','d')
+        assert len(tbl_j) == 2
+        assert np.all(tbl[0] == (0,'a'))
 
     def test_inner_str_join(self):
         tbl = Tabel({"a":list(map(str, range(4))), "b": ['a','b'] *2})
         tbl_b = Tabel({"a":list(map(str, range(4))), "c": ['d','e'] *2})
-        tbl.join(tbl_b, "a")
-        assert "c" in tbl.columns
-        assert tbl[0] == ('0','a','d')
+        tbl_j = tbl.join(tbl_b, "a", jointype="inner")
+        assert "c_r" in tbl_j.columns
+        assert tbl_j[0] == ('0','a','d')
+        assert len(tbl_j) == 4
+        assert np.all(tbl[0] == ('0','a'))
 
     def test_outer_join(self):
         tbl = Tabel({"a":list(range(4)), "b": ['a','b'] *2})
         tbl_b = Tabel({"a":list(range(2,6)), "c": [1,2] *2, "d":[1.1,2.2]*2})
-        tbl.join(tbl_b, "a", jointype='outer')
-        naneq(tbl[tbl['a']==0,:][0,'c'], Tabel.join_fill_value['integer'])
-        naneq(tbl[tbl['a']==0, :][0,'d'], Tabel.join_fill_value['float'])
-        naneq(tbl[tbl['a']==4, :][0,'b'], Tabel.join_fill_value['string'])
-        assert "c" in tbl.columns
-        assert len(tbl) == 6
+        tbl_j = tbl.join(tbl_b, "a", jointype='outer')
+        naneq(tbl_j[tbl_j['a_l']==0,'c_r'], Tabel.join_fill_value['integer'])
+        naneq(tbl_j[tbl_j['a_l']==0, 'd_r'], Tabel.join_fill_value['float'])
+        naneq(tbl_j[tbl_j['a_r']==4, 'b_l'], Tabel.join_fill_value['string'])
+        assert "c_r" in tbl_j.columns
+        assert len(tbl_j) == 6
 
 
 class TestSort(object):

@@ -220,7 +220,7 @@ The dict property of Tabel provides a way to make a DataFrame from a Tabel:
 
 >>> df = pd.DataFrame(tbl.dict)
 >>> df
-  a   b
+   a   b
 0  0  10
 1  1  11
 2  2  12
@@ -237,8 +237,12 @@ Resources & getting help
 
 Stable releases
 ================
+* tabel 1.1
 
-* tabel 1.0.0
+  * Added join and group_by methods
+  * September 27, 2018
+
+* tabel 1.0
 
   * First release
   * September 8, 2018
@@ -248,6 +252,7 @@ Dependencies
 ============
 
 * numpy
+* collections
 * tabulate (optional, recommended)
 * pandas (optional, for converting back and forth to DataFrames)
 
@@ -265,7 +270,36 @@ Tabel is perfect already, no more contributions needed. Just kidding!
 
 See the repository for filing issues and proposing enhancements.
 
-I'm using pylint, pytest and sphynx.
+I'm using pytest, pylint, doctest and sphynx.
+
+ - pytest ::
+
+    cd tabel/test
+    conda activate py36_180417
+    pytest
+    conda activate py27_180412
+    pytest
+
+ - pylint ::
+
+    cd tabel/
+    ./pylint.sh
+
+ - doctest ::
+
+    cd tabel/docs
+    make doctest
+
+ - sphynx ::
+
+    cd tabel/docs
+    make html
+
+- setuptools/pypi ::
+
+    python setup.py sdist bdist_wheel
+    twine upload dist/tabel-1.1.0.*
+
 
 Contributors
 ============
@@ -286,10 +320,10 @@ ToDo
 =====
 
 * polish error messages and validity checking and add testing for it.
-* cashe buffers for faster appending: store temp in list and concatenate to
+* cache buffers for faster appending: store temp in list and concatenate to
   array only once we use another method
 * allow for (sparse) numpy arrays as an element
-* adjust & limit __repr__ width for very wide Tabels in Jupyter cell
+* adjust & limit __repr__ width for very wide Tabels in jupyter cell
 * items() and row_items() and keys() and values() method
 * pop_column method
 * tox - environment testing

@@ -6,21 +6,10 @@
 """
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-
-import sys
-from itertools import product
 import numpy as np
-from numpy.lib.recfunctions import join_by
-
-if sys.version_info >= (3, 0):
-    PV = 3
-    ImpError = ModuleNotFoundError                      # pylint: disable=invalid-name
-elif sys.version_info >= (2, 0):
-    PV = 2
-    ImpError = ImportError
-else:
-    print("Forget about it!")
-    sys.exit(1)
+from .numpy_types import *                              # pylint: disable=wildcard-import
+from .hashjoin import HashJoinMixin
+from .util import ImpError, isstring
 
 try:
     from tabulate import tabulate
@@ -58,18 +47,6 @@ try:
 except ImpError:
     PD_PRESENT = False
 
-NP_FLOAT_TYPES = [np.float, np.float32, np.float64, np.float16]
-NP_INT_TYPES = [np.int, np.int32, np.int64]
-
-def isstring(strng):
-    """ Python version independent string checking """
-    if PV == 2:
-        return isinstance(strng, basestring)
-    elif PV == 3:
-        return isinstance(strng, str)
-    else:
-        raise NotImplementedError("Unknown python verison: {}".format(PV))
-
 
 def transpose(datastruct):
     """Transpose rows and columns.
@@ -101,26 +78,7 @@ def transpose(datastruct):
 T = transpose
 """Convenience alias for :mod:`tabel.transpose`."""
 
-
-def first(array):
-    """
-    Get the first element when doing a :mod:`tabel.Tabel.group_by`.
-
-    Arguments :
-        array (numpy ndarray) :
-            numpy 1D array containing the subset of elements
-
-    Returns :
-        The first element of ar
-
-    Examples :
-        See Tabel.group_by for examples
-
-    """
-    return array[0] if len(array) > 0 else None
-
-
-class Tabel(object):
+class Tabel(HashJoinMixin):
     """Tabel datastructure
 
     Data table with rows and columns, rows are numbered columns are named. Each
@@ -658,6 +616,8 @@ class Tabel(object):
         """Pretty print using tabulate.
 
         Examples:
+            >>> tbl = Tabel( [ ["John", "Joe", "Jane"], [1.82, 1.65, 2.15],
+            ...          [False, False, True] ], columns = ["Name", "Height", "Married"])
             >>> tbl
              Name   |   Height |   Married
             --------+----------+-----------
@@ -727,145 +687,6 @@ class Tabel(object):
         wid_chk = (len(self.columns) == len(self.data))
         len_chk = (np.all([len(d) == len(self.data[0]) for d in self.data]))
         return wid_chk and len_chk
-
-    def group_by(self, group_cols, aggregate_fie_col):
-        """Groups and aggregates Tabel.
-
-        Arguments:
-            group_cols (list) :
-                list of string names of the columns to be grouped by.
-
-            aggregate_fie_col (list)
-                list of tuples (`function`, `column`) where `function` is the
-                function to be applied to aggregate and `column` is the string
-                name of the column. `function` should take an 1D array as an
-                input and the returned value is treated as a single element.
-
-        Returns:
-            Tabel object with requested columns
-
-        Examples:
-            grouping by 'a' and then by 'b', agregating with taking the sum of
-            'a' elements and taking the first 'c' element of each group:
-
-            >>> tbl = Tabel({'a':[10, 20, 30, 40]*3, 'b':["100", "200"]*6, 'c':[100, 200]*6})
-            >>> from tabel import first
-            >>> tbl.group_by(['b', 'a'], [ (np.sum, 'a'), (first, 'c')])
-               b |   a |   a_sum |   c_first
-            -----+-----+---------+-----------
-             100 |  10 |      30 |       100
-             100 |  20 |       0 |
-             100 |  30 |      90 |       100
-             100 |  40 |       0 |
-             200 |  10 |       0 |
-             200 |  20 |      60 |       200
-             200 |  30 |       0 |
-             200 |  40 |     120 |       200
-            8 rows ['<U3', '<i8', '<i8', '|O']
-
-        """
-        uniques = []
-        un_inverses = []
-        for c in group_cols:
-            unique, unique_inverse = np.unique(self[c], return_index=False,
-                                               return_inverse=True,
-                                               return_counts=False)
-            uniques += [unique]
-            un_inverses += [unique_inverse]
-
-        def iterer(fie, col):
-            """itteration function"""
-            for un_ln in product(*un_lns):
-                yield fie(col[np.all([un_in == un_ln_i for
-                                      un_in, un_ln_i in zip(un_inverses, un_ln)], axis=0)])
-
-        tbl_o = Tabel(T(list(product(*uniques))), columns=group_cols)
-
-        for fie, col in aggregate_fie_col:
-            new_col = col + "_" + fie.__name__
-            un_lns = map(lambda un: range(len(un)), uniques)
-            new_data = list(iterer(fie, self[col]))
-            tbl_o[new_col] = np.array(new_data)
-        return tbl_o
-
-    def join(self, tbl, key, jointype="inner", **kwargs):
-        """Join two tables with key or keys
-
-        Joins two tables using the key or list of keys provided, adding the
-        collumns of the argument table to the current table. One to one joins
-        only.
-
-        Arguments:
-            tbl (Tabel) :
-                The right hand tabel to be joined to the current tabel.
-
-            key (string or list) :
-                Name of the column to be used as the key, or columns to be used
-                as keys. Both tabels should have a (one) column of the named
-                key(s), and the elements of the key columns should have no
-                duplicates (one to one joins only)
-
-            jointype (string) :
-                Type of the join to be performed: ``inner``, ``outer`` or
-                ``leftouter``. If ``inner``, returns the elements common to both
-                tabels. If ``outer``, returns the common elements as well as the
-                elements of the left tabel not in the right tabel and the
-                elements of the right tabel not in the left tabel. If
-                ``leftouter``, returns the common elements and the elements of
-                the left tabel not in the right tabel.
-
-            kwargs () :
-                kwargs passed on to `numpy.lib.recfunctions.join_by`.
-
-        Returns:
-            Nothing. Tabel is joined in place with the input.
-
-        Examples:
-            Join a Tabel into the current Tabel matching on column 'a':
-
-            >>> tbl = Tabel({"a":list(range(4)), "b": ['a', 'b'] *2})
-            >>> tbl_b = Tabel({"a":list(range(4)), "c": ['d', 'e'] *2})
-            >>> tbl.join(tbl_b, "a")
-            >>> tbl
-               a | b   | c
-            -----+-----+-----
-               0 | a   | d
-               1 | b   | e
-               2 | a   | d
-               3 | b   | e
-            4 rows ['<i8', '<U1', '<U1']
-        """
-        for k in key if hasattr(key, '__iter__') else [key]:
-            i = self.columns.index(k)
-            _unq, unq_cnt = np.unique(self.data[i], return_counts=True)
-            assert not np.any(unq_cnt > 1), \
-                "Elements of the current tabel in column {k} are not unique.".format(k=k)
-            i = tbl.columns.index(k)
-            _unq, unq_cnt = np.unique(tbl.data[i], return_counts=True)
-            assert not np.any(unq_cnt > 1), \
-                "Elements of the right tabel in column {k} are not unique.".format(k=k)
-
-        l_struct = np.empty(len(self), dtype=self.dtype)
-        for c, dt in zip(self.columns, self.data):
-            l_struct[c] = dt
-
-        r_struct = np.empty(len(tbl), dtype=tbl.dtype)
-        for c, dt in zip(tbl.columns, tbl.data):
-            r_struct[c] = dt
-
-        join = join_by(key, l_struct, r_struct, jointype=jointype, **kwargs)
-        if jointype != 'inner':
-            for c in join.dtype.names:
-                if join.dtype[c] in NP_FLOAT_TYPES:
-                    join[c].fill_value = self.join_fill_value['float']
-                if join.dtype[c].kind in {'U', 'S'}:
-                    join[c].fill_value = self.join_fill_value['string']
-                if join.dtype[c] == np.integer:
-                    join[c].fill_value = self.join_fill_value['integer']
-
-        join = join.filled()
-        self.columns = join.dtype.names
-        self.data = [join[name] for name in join.dtype.names]
 
     def sort(self, columns):
         """Sort the Tabel.

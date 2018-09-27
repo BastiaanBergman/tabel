@@ -1,5 +1,0 @@
-=================
-api manual
-=================
-.. automodule:: tabel
-   :members:

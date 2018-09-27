@@ -173,13 +173,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-tabel.tabel">
-<span id="tabel-module"></span><h1>tabel module<a class="headerlink" href="#module-tabel.tabel" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-tabel">
+<span id="tabel-module"></span><h1>tabel module<a class="headerlink" href="#module-tabel" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="transpose">
 <h2>transpose<a class="headerlink" href="#transpose" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="tabel.tabel.transpose">
-<code class="descclassname">tabel.tabel.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>datastruct</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.tabel.transpose" title="Permalink to this definition">¶</a></dt>
+<dt id="tabel.transpose">
+<code class="descclassname">tabel.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>datastruct</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.transpose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transpose rows and columns.</p>
 <p>Convenience function. Usually DB connectors return data as a list of
 records, Tabel takes and internally stores data as a list of columns (column
@@ -200,17 +200,17 @@ column.</td>
 </dd></dl>
 
 <dl class="function">
-<dt id="tabel.tabel.T">
-<code class="descclassname">tabel.tabel.</code><code class="descname">T</code><span class="sig-paren">(</span><em>datastruct</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.tabel.T" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience alias for <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.transpose</span></code>.</p>
+<dt id="tabel.T">
+<code class="descclassname">tabel.</code><code class="descname">T</code><span class="sig-paren">(</span><em>datastruct</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.T" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience alias for <a class="reference internal" href="#tabel.transpose" title="tabel.transpose"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.transpose</span></code></a>.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="read-tabel">
 <h2>read_tabel<a class="headerlink" href="#read-tabel" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="tabel.tabel.read_tabel">
-<code class="descclassname">tabel.tabel.</code><code class="descname">read_tabel</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.tabel.read_tabel" title="Permalink to this definition">¶</a></dt>
+<dt id="tabel.read_tabel">
+<code class="descclassname">tabel.</code><code class="descname">read_tabel</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.read_tabel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read data from disk</p>
 <p>Read data from disk and return a Tabel object.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -234,8 +234,8 @@ column.</td>
 <div class="section" id="first">
 <h2>first<a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="tabel.tabel.first">
-<code class="descclassname">tabel.tabel.</code><code class="descname">first</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.tabel.first" title="Permalink to this definition">¶</a></dt>
+<dt id="tabel.first">
+<code class="descclassname">tabel.</code><code class="descname">first</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.first" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the first element when doing a <a class="reference internal" href="tabel.html#tabel.Tabel.group_by" title="tabel.Tabel.group_by"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel.group_by</span></code></a>.</p>
 <dl class="docutils">
 <dt>Arguments :</dt>

@@ -1,7 +1,7 @@
 tabel module
 ============
 
-.. module:: tabel.tabel
+.. module:: tabel
 
 transpose
 ---------

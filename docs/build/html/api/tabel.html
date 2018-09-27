@@ -192,8 +192,8 @@
   <div class="section" id="class-tabel">
 <h1>class Tabel<a class="headerlink" href="#class-tabel" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="tabel.tabel.Tabel">
-<em class="property">class </em><code class="descclassname">tabel.tabel.</code><code class="descname">Tabel</code><span class="sig-paren">(</span><em>datastruct=None</em>, <em>columns=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.tabel.Tabel" title="Permalink to this definition">¶</a></dt>
+<dt id="tabel.Tabel">
+<em class="property">class </em><code class="descclassname">tabel.</code><code class="descname">Tabel</code><span class="sig-paren">(</span><em>datastruct=None</em>, <em>columns=None</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tabel datastructure</p>
 <p>Data table with rows and columns, rows are numbered columns are named. Each
 column has its own datatype. Data is stored by columns (column store), fixed
@@ -204,7 +204,7 @@ datatype per column, varyiable datatypes from column to column.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>datastruct</strong> (<em>object</em>) – list, tuple, ndarray or dict of lists, tuples, ndarrays or elements;
-or a <cite>pandas.DataFrame</cite>. List of columns of data. See <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code> for
+or a <cite>pandas.DataFrame</cite>. List of columns of data. See <a class="reference internal" href="module.html#tabel.T" title="tabel.T"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code></a> for
 a convenience function to transpose a list of records.</li>
 <li><strong>columns</strong> (<em>list of strings</em>) – Column names, ignored when keys are part of the datastruct (dict and
 <cite>pandas.DataFrame</cite>). Automatic names are generated, if omitted, as
@@ -435,7 +435,9 @@ while seccond case the type of the Name column changes to “&lt;i8”.</p>
 <dd><p>Pretty print using tabulate.</p>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Joe&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.82</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span> <span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">,</span> <span class="s2">&quot;Married&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
 <span class="go"> Name   |   Height |   Married</span>
 <span class="go">--------+----------+-----------</span>
 <span class="go"> John   |     1.82 |         0</span>
@@ -460,7 +462,7 @@ is appended to each column of the instance invoking the method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tbl</strong> (<a class="reference internal" href="#tabel.tabel.Tabel" title="tabel.tabel.Tabel"><em>Tabel</em></a>) – Tabel with the same columns as the current Tabel, order of
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tbl</strong> (<a class="reference internal" href="#tabel.Tabel" title="tabel.Tabel"><em>Tabel</em></a>) – Tabel with the same columns as the current Tabel, order of
 columns does not need to match. Columns do not need to match if
 the current Tabel has zero length. Besides Tabel onjects
 pandas.DataFrame objects are also allowed.</td>
@@ -500,50 +502,59 @@ has zero length.</td>
 <h2>join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="tabel.Tabel.join">
-<code class="descclassname">Tabel.</code><code class="descname">join</code><span class="sig-paren">(</span><em>tbl</em>, <em>key</em>, <em>jointype='inner'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.join" title="Permalink to this definition">¶</a></dt>
-<dd><p>Join two tables with key or keys</p>
-<p>Joins two tables using the key or list of keys provided, adding the
-collumns of the argument table to the current table. One to one joins
-only.</p>
+<code class="descclassname">Tabel.</code><code class="descname">join</code><span class="sig-paren">(</span><em>tbl_r</em>, <em>key</em>, <em>key_r=None</em>, <em>jointype='inner'</em>, <em>suffixes=('_l'</em>, <em>'_r')</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>dbase join tables with ind column(s) as the keys.</p>
+<p>Performs a database style joins on the two tables, the current instance
+and the provided tabel ‘tbl_r’ on the columns listed in ‘key’.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>tbl</strong> (<a class="reference internal" href="#tabel.tabel.Tabel" title="tabel.tabel.Tabel"><em>Tabel</em></a>) – The right hand tabel to be joined to the current tabel.</li>
-<li><strong>key</strong> (<em>string</em><em> or </em><em>list</em>) – Name of the column to be used as the key, or columns to be used
-as keys. Both tabels should have a (one) column of the named
-key(s), and the elements of the key columns should have no
-duplicates (one to one joins only)</li>
-<li><strong>jointype</strong> (<em>string</em>) – Type of the join to be performed: <code class="docutils literal notranslate"><span class="pre">inner</span></code>, <code class="docutils literal notranslate"><span class="pre">outer</span></code> or
-<code class="docutils literal notranslate"><span class="pre">leftouter</span></code>. If <code class="docutils literal notranslate"><span class="pre">inner</span></code>, returns the elements common to both
-tabels. If <code class="docutils literal notranslate"><span class="pre">outer</span></code>, returns the common elements as well as the
-elements of the left tabel not in the right tabel and the
-elements of the right tabel not in the left tabel. If
-<code class="docutils literal notranslate"><span class="pre">leftouter</span></code>, returns the common elements and the elements of
-the left tabel not in the right tabel.</li>
-<li><strong>(</strong><strong>)</strong> (<em>kwargs</em>) – kwargs passed on to <cite>numpy.lib.recfunctions.join_by</cite>.</li>
+<li><strong>tbl_r</strong> (<a class="reference internal" href="#tabel.Tabel" title="tabel.Tabel"><em>Tabel</em></a>) – The right tabel to be joined.</li>
+<li><strong>key</strong> (<em>string</em><em> or </em><em>list</em>) – Name of the column(s) to be used as the key(s).</li>
+<li><strong>key_r</strong> (<em>list</em>) – A list of columnnames of the right tabel matching the left
+tabel. Defaults to the list provided in <cite>ind</cite>.</li>
+<li><strong>jointype</strong> (<em>str</em>) – One of: <cite>inner</cite>, <cite>left</cite>, <cite>right</cite>, <cite>outer</cite>. If <cite>inner</cite>, returns
+the elements common to both tabels. If <cite>outer</cite>, returns the
+common elements as well as the elements of the left tabel not in
+the right tabel and the elements of the right tabel not in the
+left tabel. If <cite>left</cite>, returns the common elements and the
+elements of the left tabel not in the right tabel. If <cite>right</cite>,
+returns the common elements and the elements of the right tabel
+not in the left tabel.</li>
+<li><strong>suffixes</strong> (<em>tuple</em>) – Strings to be added to the left and right tabel column names.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Nothing. Tabel is joined in place with the input.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The joined tabel</p>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p class="last">The order and suffixes of the returned Tabel depend on the jointype.
+For all types, all but the key columns are suffixed with the left
+and the right suffix respectively. The left Tabel columns come first
+followed by the right Tabel columns, with the key column placed
+first of its Tabel columns. For <cite>inner</cite> and <cite>left</cite> jointypes the
+right key column is left out. for <cite>right</cite> jointype the left key
+column is left out. For the <cite>outer</cite> jointype both keys are present
+and suffixed.</p>
+</div>
 <div class="admonition-examples admonition">
 <p class="first admonition-title">Examples</p>
 <p>Join a Tabel into the current Tabel matching on column ‘a’:</p>
 <div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl_b</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tbl_b</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
-<span class="go">   a | b   | c</span>
-<span class="go">-----+-----+-----</span>
-<span class="go">   0 | a   | d</span>
-<span class="go">   1 | b   | e</span>
-<span class="go">   2 | a   | d</span>
-<span class="go">   3 | b   | e</span>
+<span class="go">   a | b_l   | c_r</span>
+<span class="go">-----+-------+-------</span>
+<span class="go">   0 | a     | d</span>
+<span class="go">   1 | b     | e</span>
+<span class="go">   2 | a     | d</span>
+<span class="go">   3 | b     | e</span>
 <span class="go">4 rows [&#39;&lt;i8&#39;, &#39;&lt;U1&#39;, &#39;&lt;U1&#39;]</span>
 </pre></div>
 </div>
@@ -555,18 +566,19 @@ the left tabel not in the right tabel.</li>
 <h2>group_by<a class="headerlink" href="#group-by" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="tabel.Tabel.group_by">
-<code class="descclassname">Tabel.</code><code class="descname">group_by</code><span class="sig-paren">(</span><em>group_cols</em>, <em>aggregate_fie_col</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.group_by" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Tabel.</code><code class="descname">group_by</code><span class="sig-paren">(</span><em>key</em>, <em>aggregate_fie_col=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.group_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Groups and aggregates Tabel.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>group_cols</strong> (<em>list</em>) – list of string names of the columns to be grouped by.</li>
+<li><strong>key</strong> (<em>str</em><em> or </em><em>list</em>) – name or list of names of the columns to be grouped by.</li>
 <li><strong>aggregate_fie_col</strong> (<em>list</em>) – list of tuples (<cite>function</cite>, <cite>column</cite>) where <cite>function</cite> is the
-function to be applied to aggregate and <cite>column</cite> is the string
-name of the column. <cite>function</cite> should take an 1D array as an
-input and the returned value is treated as a single element.</li>
+function to be applied to aggregate and <cite>column</cite> is the string name
+of the column. <cite>function</cite> should take an 1D array as an input and
+the returned value is treated as a single element. Only the grouped
+columns of <cite>key</cite> are returned if ommited.</li>
 </ul>
 </td>
 </tr>
@@ -585,14 +597,10 @@ input and the returned value is treated as a single element.</li>
 <span class="go">   b |   a |   a_sum |   c_first</span>
 <span class="go">-----+-----+---------+-----------</span>
 <span class="go"> 100 |  10 |      30 |       100</span>
-<span class="go"> 100 |  20 |       0 |</span>
-<span class="go"> 100 |  30 |      90 |       100</span>
-<span class="go"> 100 |  40 |       0 |</span>
-<span class="go"> 200 |  10 |       0 |</span>
 <span class="go"> 200 |  20 |      60 |       200</span>
-<span class="go"> 200 |  30 |       0 |</span>
+<span class="go"> 100 |  30 |      90 |       100</span>
 <span class="go"> 200 |  40 |     120 |       200</span>
-<span class="go">8 rows [&#39;&lt;U3&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;, &#39;|O&#39;]</span>
+<span class="go">4 rows [&#39;&lt;U3&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;]</span>
 </pre></div>
 </div>
 </div>

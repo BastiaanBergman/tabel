@@ -185,7 +185,7 @@
 <h1>Cookbook<a class="headerlink" href="#cookbook" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
-<p>API documentation: <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel</span></code>.</p>
+<p>API documentation: <a class="reference internal" href="api/tabel.html#tabel.Tabel" title="tabel.Tabel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.Tabel</span></code></a>.</p>
 <p>From a list of lists and a separate list of column names:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">Tabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">([</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Joe&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span>
@@ -549,7 +549,7 @@ while seccond case the type of the Name column changes to <cite>&lt;i8</cite>.</
 </div>
 <div class="section" id="transposing">
 <h2>Transposing<a class="headerlink" href="#transposing" title="Permalink to this headline">¶</a></h2>
-<p>API documentation: <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code>.</p>
+<p>API documentation: <a class="reference internal" href="api/module.html#tabel.T" title="tabel.T"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.T</span></code></a>.</p>
 <p>Data from database connectors often comes in list of records, a convenience
 function is available to make the transpose:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">T</span>
@@ -593,14 +593,10 @@ argument is a list of tuples for the aggregate functions and their columns:</p>
 <span class="go">   b |   a |   a_sum |   c_first</span>
 <span class="go">-----+-----+---------+-----------</span>
 <span class="go"> 100 |  10 |      30 |       100</span>
-<span class="go"> 100 |  20 |       0 |</span>
-<span class="go"> 100 |  30 |      90 |       100</span>
-<span class="go"> 100 |  40 |       0 |</span>
-<span class="go"> 200 |  10 |       0 |</span>
 <span class="go"> 200 |  20 |      60 |       200</span>
-<span class="go"> 200 |  30 |       0 |</span>
+<span class="go"> 100 |  30 |      90 |       100</span>
 <span class="go"> 200 |  40 |     120 |       200</span>
-<span class="go">8 rows [&#39;&lt;U3&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;, &#39;|O&#39;]</span>
+<span class="go">4 rows [&#39;&lt;U3&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;, &#39;&lt;i8&#39;]</span>
 </pre></div>
 </div>
 <p><cite>first</cite> is a convenience function, for when aggregation should just take the
@@ -641,13 +637,12 @@ key for joining:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl_b</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">]</span> <span class="o">*</span><span class="mi">2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tbl_b</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
-<span class="go">   a | b   | c</span>
-<span class="go">-----+-----+-----</span>
-<span class="go">   0 | a   | d</span>
-<span class="go">   1 | b   | e</span>
-<span class="go">   2 | a   | d</span>
-<span class="go">   3 | b   | e</span>
+<span class="go">   a | b_l   | c_r</span>
+<span class="go">-----+-------+-------</span>
+<span class="go">   0 | a     | d</span>
+<span class="go">   1 | b     | e</span>
+<span class="go">   2 | a     | d</span>
+<span class="go">   3 | b     | e</span>
 <span class="go">4 rows [&#39;&lt;i8&#39;, &#39;&lt;U1&#39;, &#39;&lt;U1&#39;]</span>
 </pre></div>
 </div>
@@ -667,7 +662,7 @@ key for joining:</p>
 </div>
 <div class="section" id="reading">
 <h2>Reading<a class="headerlink" href="#reading" title="Permalink to this headline">¶</a></h2>
-<p>API documentation: <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.read_tabel</span></code>.</p>
+<p>API documentation: <a class="reference internal" href="api/module.html#tabel.read_tabel" title="tabel.read_tabel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabel.read_tabel</span></code></a>.</p>
 <p>Read from disk:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabel</span> <span class="k">import</span> <span class="n">read_tabel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">read_tabel</span><span class="p">(</span><span class="s2">&quot;test.csv&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>

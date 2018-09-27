@@ -422,14 +422,10 @@ argument is a list of tuples for the aggregate functions and their columns:
      b |   a |   a_sum |   c_first
   -----+-----+---------+-----------
    100 |  10 |      30 |       100
-   100 |  20 |       0 |
-   100 |  30 |      90 |       100
-   100 |  40 |       0 |
-   200 |  10 |       0 |
    200 |  20 |      60 |       200
-   200 |  30 |       0 |
+   100 |  30 |      90 |       100
    200 |  40 |     120 |       200
-  8 rows ['<U3', '<i8', '<i8', '|O']
+  4 rows ['<U3', '<i8', '<i8', '<i8']
 
 `first` is a convenience function, for when aggregation should just take the
 first element.
@@ -469,13 +465,12 @@ key for joining:
   >>> tbl = Tabel({"a":list(range(4)), "b": ['a','b'] *2})
   >>> tbl_b = Tabel({"a":list(range(4)), "c": ['d','e'] *2})
   >>> tbl.join(tbl_b, "a")
-  >>> tbl
-     a | b   | c
-  -----+-----+-----
-     0 | a   | d
-     1 | b   | e
-     2 | a   | d
-     3 | b   | e
+     a | b_l   | c_r
+  -----+-------+-------
+     0 | a     | d
+     1 | b     | e
+     2 | a     | d
+     3 | b     | e
   4 rows ['<i8', '<U1', '<U1']
 
 

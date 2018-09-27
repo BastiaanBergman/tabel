@@ -1,9 +1,9 @@
 class Tabel
 ============
 
-.. currentmodule: tabel.tabel
+.. currentmodule: tabel
 
-.. autoclass:: tabel.tabel.Tabel
+.. autoclass:: tabel.Tabel
 
 getter
 ------
@@ -14,6 +14,7 @@ setter
 ------
 
 .. automethod:: tabel.Tabel.__setitem__
+
 
 repr
 ----

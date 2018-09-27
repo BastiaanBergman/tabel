@@ -387,7 +387,7 @@ is easy:</p>
 <p>The dict property of Tabel provides a way to make a DataFrame from a Tabel:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tbl</span><span class="o">.</span><span class="n">dict</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">  a   b</span>
+<span class="go">   a   b</span>
 <span class="go">0  0  10</span>
 <span class="go">1  1  11</span>
 <span class="go">2  2  12</span>
@@ -408,7 +408,12 @@ will try to monitor for it.</li>
 <div class="section" id="stable-releases">
 <h1>Stable releases<a class="headerlink" href="#stable-releases" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>tabel 1.0.0<ul>
+<li>tabel 1.1<ul>
+<li>Added join and group_by methods</li>
+<li>September 27, 2018</li>
+</ul>
+</li>
+<li>tabel 1.0<ul>
 <li>First release</li>
 <li>September 8, 2018</li>
 </ul>
@@ -419,6 +424,7 @@ will try to monitor for it.</li>
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>numpy</li>
+<li>collections</li>
 <li>tabulate (optional, recommended)</li>
 <li>pandas (optional, for converting back and forth to DataFrames)</li>
 </ul>
@@ -434,7 +440,38 @@ will try to monitor for it.</li>
 <h1>Contributing to Tabel<a class="headerlink" href="#contributing-to-tabel" title="Permalink to this headline">¶</a></h1>
 <p>Tabel is perfect already, no more contributions needed. Just kidding!</p>
 <p>See the repository for filing issues and proposing enhancements.</p>
-<p>I’m using pylint, pytest and sphynx.</p>
+<p>I’m using pytest, pylint, doctest and sphynx.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">pytest</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tabel</span><span class="o">/</span><span class="n">test</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">py36_180417</span>
+<span class="n">pytest</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">py27_180412</span>
+<span class="n">pytest</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">pylint</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tabel</span><span class="o">/</span>
+<span class="o">./</span><span class="n">pylint</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">doctest</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tabel</span><span class="o">/</span><span class="n">docs</span>
+<span class="n">make</span> <span class="n">doctest</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">sphynx</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">tabel</span><span class="o">/</span><span class="n">docs</span>
+<span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="contributors">
 <h1>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h1>
@@ -451,10 +488,10 @@ is old fashioned as well.</p>
 <h1>ToDo<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li>polish error messages and validity checking and add testing for it.</li>
-<li>cashe buffers for faster appending: store temp in list and concatenate to
+<li>cache buffers for faster appending: store temp in list and concatenate to
 array only once we use another method</li>
 <li>allow for (sparse) numpy arrays as an element</li>
-<li>adjust &amp; limit __repr__ width for very wide Tabels in Jupyter cell</li>
+<li>adjust &amp; limit __repr__ width for very wide Tabels in jupyter cell</li>
 <li>items() and row_items() and keys() and values() method</li>
 <li>pop_column method</li>
 <li>tox - environment testing</li>

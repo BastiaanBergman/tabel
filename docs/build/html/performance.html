@@ -191,7 +191,7 @@ arithmetic</li>
 <div><ul class="simple">
 <li>numpy - if your data is purely numerical or when fields in a row have no relation.</li>
 <li>HDF5  - if your data does not fit in memory</li>
-<li>SQLite or MySQL - if you need complex DB queries</li>
+<li>SQLite or MySQL - if you need complex DB queries (e.g. transactional)</li>
 </ul>
 </div></blockquote>
 <p>That said, good general performance is paramount. Here below are some tests to
@@ -257,7 +257,7 @@ return value should be an array. Tabel is abut 15x faster in this case:</p>
 <p>I find myself often doing something similar to the following procedure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">large_number</span><span class="p">:</span>                        
 <span class="gp">... </span> <span class="n">row</span> <span class="o">=</span> <span class="n">calculate_something</span><span class="p">()</span>
-<span class="gp">... </span> <span class="n">tabel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+<span class="gp">... </span> <span class="n">tbl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>where “do something” could be reading some tricky formatted ascii file or
@@ -304,10 +304,10 @@ those please let me know and I happily add it here.</p>
 <h2>grouping tables<a class="headerlink" href="#grouping-tables" title="Permalink to this headline">¶</a></h2>
 <p>A big Tabel with a million rows can be grouped by multiple columns. Both pandas
 and Tabel take a good amount of time on this, but then this is typically done
-once on a an individual Tabel or DataFrame. pandas is about twice as fast as
-Tabel on this simple test, again please let me know if you come across other
-scenarios that have significant different performances.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+once on a an individual Tabel or DataFrame. pandas is about 10x faster than
+Tabel on this simple test. The good news is that this is independent of n,
+meaning they’re both equally scalable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_pandas_groupby</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -316,7 +316,7 @@ scenarios that have significant different performances.</p>
 <span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test_pandas_groupby</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>                         
-<span class="go">(372.4931063130498, &#39;mili-sec&#39;)</span>
+<span class="go">(34.32465291116387, &#39;mili-sec&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_tabel_groupby</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">t0</span> <span class="o">=</span> <span class="n">default_timer</span><span class="p">()</span>
@@ -324,16 +324,16 @@ scenarios that have significant different performances.</p>
 <span class="gp">... </span>        <span class="n">_</span> <span class="o">=</span> <span class="n">tbl</span><span class="o">.</span><span class="n">group_by</span><span class="p">((</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),[(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)])</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel_groupby</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>                          
-<span class="go">(785.5960309971124, &#39;mili-sec&#39;)</span>
+<span class="go">(322.54316059406847, &#39;mili-sec&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="joining-tables">
 <h2>joining tables<a class="headerlink" href="#joining-tables" title="Permalink to this headline">¶</a></h2>
 <p>Two Tabels can be joined together by some common key present in both Tabels. Two
-table with a million rows takes about 1 second to be joined with pandas and 10
-times that with Tabel. See the codeblock below for the specific case tested
-here.</p>
+table with a million rows takes about 2.5 second to be joined with pandas and 5
+times that with Tabel, this ratio reduces somewhat with n. See the codeblock
+below for the specific case tested here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">)}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_dict</span><span class="p">)</span>
@@ -351,7 +351,7 @@ here.</p>
 <span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">tbl_1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tbl_2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">jointype</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span> <span class="s2">&quot;mili-sec&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">test_tabel_join</span><span class="p">()</span>                               
-<span class="go">(24791.613722220063, &#39;mili-sec&#39;)</span>
+<span class="go">(10393.40596087277, &#39;mili-sec&#39;)</span>
 </pre></div>
 </div>
 </div>

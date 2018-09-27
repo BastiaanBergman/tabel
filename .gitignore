@@ -1,3 +1,9 @@
 *.pyc
 .ipynb_checkpoints/
 .DS_Store
+build/
+.cache/
+.pytest_cache/
+dist/
+example/
+local_todo.rst
