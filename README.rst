@@ -252,7 +252,6 @@ Dependencies
 ============
 
 * numpy
-* collections
 * tabulate (optional, recommended)
 * pandas (optional, for converting back and forth to DataFrames)
 
@@ -270,7 +269,7 @@ Tabel is perfect already, no more contributions needed. Just kidding!
 
 See the repository for filing issues and proposing enhancements.
 
-I'm using pytest, pylint, doctest and sphynx.
+I'm using pytest, pylint, doctest, sphynx and setuptools.
 
  - pytest ::
 

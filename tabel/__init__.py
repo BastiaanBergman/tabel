@@ -6,5 +6,6 @@
 """
 from .tabel import Tabel, read_tabel, transpose, T
 from .hashjoin import first
-__all__ = ["Tabel", "first", "transpose", "T", "read_tabel"]
+from ._version import __version__
+__all__ = ["Tabel", "first", "transpose", "T", "read_tabel", "__version__"]
 name = "tabel"                                      # pylint: disable=invalid-name
