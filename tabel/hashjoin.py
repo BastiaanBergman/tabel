@@ -38,7 +38,12 @@ def add_empty_row(tbl):
             empty_row.append(tbl.join_fill_value['string'])
         if tbl.dtype[c] in NP_INT_TYPES:
             empty_row.append(tbl.join_fill_value['integer'])
-    tbl.row_append(empty_row)
+    try:
+        tbl.row_append(empty_row)
+    except ValueError as ve:
+        raise ValueError("Outer join cannot be fullfilled when there are other ",
+                         "columns than float, string or integer because Tabel ",
+                         "doesn't know what to fill it up with.")
 
 def remove_empty_row(tbl):
     """Remove the last (emtpy) row of a Tabel, used for outer joins

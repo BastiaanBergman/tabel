@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: tabel
-Version: 1.1.1
+Version: 1.2.0
 Summary: Lightweight, intuitive and fast data-tables.
 Home-page: https://github.com/BastiaanBergman/tabel
 Author: Bastiaan Bergman
@@ -247,6 +247,11 @@ Description: About Tabel
         
         Stable releases
         ================
+        * tabel 1.2
+        
+          * Fix for numpy 1.15.5 "warnings"
+          * Fix for outerjoin to raise an error in case of unsupported datatypes
+        
         * tabel 1.1
         
           * Added join and group_by methods
@@ -262,16 +267,15 @@ Description: About Tabel
         ============
         
         * numpy
-        * collections
         * tabulate (optional, recommended)
         * pandas (optional, for converting back and forth to DataFrames)
         
         Tested on:
         ----------
         
-        * Python 2.7.14; numpy 1.14.0
+        * Python 3.6.4;  numpy 1.15.4
         * Python 3.6.4;  numpy 1.14.3
-        
+        * Python 2.7.14; numpy 1.14.0
         
         
         Contributing to Tabel
@@ -280,14 +284,14 @@ Description: About Tabel
         
         See the repository for filing issues and proposing enhancements.
         
-        I'm using pytest, pylint, doctest and sphynx.
+        I'm using pytest, pylint, doctest, sphynx and setuptools.
         
          - pytest ::
         
             cd tabel/test
-            conda activate py36_180417
+            conda activate py3_6
             pytest
-            conda activate py27_180412
+            conda activate py2_7
             pytest
         
          - pylint ::

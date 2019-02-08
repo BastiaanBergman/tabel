@@ -213,6 +213,9 @@ class Tabel(HashJoinMixin):
         elif len(row) == len(self.columns):
             for ci, dta in enumerate(row):
                 self.data[ci] = np.concatenate([self.data[ci], np.array([dta])])
+        else:
+            raise ValueError("Number of elements in {row} not equal ".format(row=row),
+                             "to number of columns in Tabel.")
 
         if not self.valid:
             raise ValueError("Invalid datastructure.")
@@ -277,14 +280,15 @@ class Tabel(HashJoinMixin):
         raise ValueError("Not a single, existing column: {}".format(c))
 
     def _column_indices(self, c):
-        # Slice, indices or booleans?
-        try:
-            c = np.arange(len(self.columns))[c]
-            assert np.all(c < len(self.columns))
-            return c
-        except (ValueError, TypeError,              # pylint: disable=unused-variable
-                IndexError, AssertionError) as e:
-            pass
+        # Slice or ndarray of indices or booleans?
+        if isinstance(c, slice) or isinstance(c, np.ndarray):
+            try:
+                c = np.arange(len(self.columns))[c]
+                assert np.all(c < len(self.columns))
+                return c
+            except (ValueError, TypeError,              # pylint: disable=unused-variable
+                    IndexError, AssertionError) as e:
+                pass
 
         # Iterable with column names?
         try:
@@ -394,13 +398,14 @@ class Tabel(HashJoinMixin):
         Returns :
 
         """
-        # Single element?
-        try:
-            r = int(r)
-            c = self._column_index(c)
-            return self.data[c][r]
-        except (ValueError, TypeError) as e:        # pylint: disable=unused-variable
-            pass
+        if not isinstance(r, np.ndarray):
+            # Single element?
+            try:
+                r = int(r)
+                c = self._column_index(c)
+                return self.data[c][r]
+            except (ValueError, TypeError) as e:        # pylint: disable=unused-variable
+                pass
 
         # Single column?
         try:
@@ -409,13 +414,14 @@ class Tabel(HashJoinMixin):
         except (ValueError, TypeError) as e:        # pylint: disable=unused-variable
             pass
 
-        # Single row?
-        try:
-            r = int(r)
-            c = self._column_indices(c)
-            return tuple(self.data[ci][r] for ci in c)
-        except (ValueError, TypeError) as e:        # pylint: disable=unused-variable
-            pass
+        if not isinstance(r, np.ndarray):
+            # Single row?
+            try:
+                r = int(r)
+                c = self._column_indices(c)
+                return tuple(self.data[ci][r] for ci in c)
+            except (ValueError, TypeError) as e:        # pylint: disable=unused-variable
+                pass
 
         # Requesting a sub-Tabel
         try:

@@ -102,7 +102,7 @@ class TestSlice(object):
                 assert type(tbl[0,0]) == type(tbl.data[0][0])
                 assert type(tbl[[0],[0]]) == Tabel
                 (r,c) = tbl.shape
-                assert type(tbl[[True]*r,[True]*c]) == Tabel
+                assert type(tbl[np.array([True]*r),np.array([True]*c)]) == Tabel
                 assert type(tbl[list(range(r)),list(range(c))]) == Tabel
                 assert type(tbl[:,:]) == Tabel
 
@@ -121,11 +121,11 @@ class TestSlice(object):
         for tbl in tbls:
             if tbl.shape[0] > 0 & tbl.shape[1] > 0:
                 ind = tbl[:,0] == 0
-                ind = ind if type(ind) in (tuple, list, np.ndarray) else [ind]
+                ind = ind if isinstance(ind, np.ndarray) else np.array([ind])
                 assert type(tbl[ind,:]) == Tabel
 
     def test_slice_permiseable(self, tbls):
-        row_it = [slice(0,2,None), [0,1], [True,False,True], 0, np.array([0,1]),
+        row_it = [slice(0,2,None), [0,1], np.array([True,False,True]), 0, np.array([0,1]),
                   np.array([False, True, False]), slice(0,3,2)]
         col_it = row_it + [["Name", "Height"], "Name", ["Height", "Name"]]
         keys = list(product(row_it, col_it))
@@ -159,7 +159,7 @@ class TestSetter(object):
         tbl[0,:] = (12, "12", 12.12)
         tbl[1,['a','b']] = [12, "12"]
         tbl[2] = (13, "13", 13.13)
-        tbl[3, [True, False, True]] = (14, 14.14)
+        tbl[3, np.array([True, False, True])] = (14, 14.14)
 
     def test_add_column(self):
         tbl = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
