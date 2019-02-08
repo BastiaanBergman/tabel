@@ -3,6 +3,8 @@ MANIFEST.in
 README.rst
 setup.py
 tabel/__init__.py
+tabel/_version.py
+tabel/git_version.py
 tabel/hashjoin.py
 tabel/numpy_types.py
 tabel/tabel.py

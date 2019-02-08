@@ -237,6 +237,11 @@ Resources & getting help
 
 Stable releases
 ================
+* tabel 1.2
+
+  * Fix for numpy 1.15.5 "warnings"
+  * Fix for outerjoin to raise an error in case of unsupported datatypes
+
 * tabel 1.1
 
   * Added join and group_by methods
@@ -258,9 +263,9 @@ Dependencies
 Tested on:
 ----------
 
-* Python 2.7.14; numpy 1.14.0
+* Python 3.6.4;  numpy 1.15.4
 * Python 3.6.4;  numpy 1.14.3
-
+* Python 2.7.14; numpy 1.14.0
 
 
 Contributing to Tabel
