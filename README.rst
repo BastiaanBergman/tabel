@@ -237,7 +237,12 @@ Resources & getting help
 
 Stable releases
 ================
-* tabel 1.2
+* tabel 1.2.1
+
+  * Removed unicode characters from description to fix pip install
+    `issue <https://github.com/BastiaanBergman/tabel/issues/6#issue-440282452>`.
+
+* tabel 1.2.0
 
   * Fix for numpy 1.15.5 "warnings"
   * Fix for outerjoin to raise an error in case of unsupported datatypes
@@ -313,7 +318,7 @@ Just me, Bastiaan Bergman [Bastiaan.Bergman@gmail.com].
 What's in the name?
 ===================
 
-*Tabel* /taːˈbɛl/ is Dutch for table (two-dimensional enlisting), `wiktionary
+*Tabel* is Dutch for table (two-dimensional enlisting), `wiktionary
 <https://nl.wiktionary.org/wiki/tabel>`_. The english word table, as in "dinner
 table", translates in Dutch to *tafel*. The Dutch word *tafel* is an old
 fashioned word for data-table, mostly used for calculation tables which itself
