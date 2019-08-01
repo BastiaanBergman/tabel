@@ -671,7 +671,7 @@ Tabel.</td>
 <h2>save<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="tabel.Tabel.save">
-<code class="descclassname">Tabel.</code><code class="descname">save</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.save" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Tabel.</code><code class="descname">save</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save to file</p>
 <p>Saves the Tabel data including a header with the column names to a file
 of the specified name in the current directory or the directory
@@ -695,6 +695,8 @@ standard <cite>gzip</cite> module.</dd>
 <dd>Write to compressed <cite>numpy</cite> native binary format.</dd>
 </dl>
 </li>
+<li><strong>header</strong> (<em>bool</em>) – whether to write a header line with the column names, only used for
+csv and gz</li>
 </ul>
 </td>
 </tr>

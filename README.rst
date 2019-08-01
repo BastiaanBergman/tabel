@@ -237,6 +237,13 @@ Resources & getting help
 
 Stable releases
 ================
+* tabel 1.2.2
+
+  * Added argument to save and read methods for csv and gz formats to specify
+    whether or not to write/read a header with the column names. For reading
+    header can be left to None for automatic sniffing of the header. Default is
+    True for both read and save methods.
+
 * tabel 1.2.1
 
   * Removed unicode characters from description to fix pip install
