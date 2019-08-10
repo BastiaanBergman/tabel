@@ -606,6 +606,79 @@ class Tabel(HashJoinMixin):
 
         raise KeyError("Invalid key provided: ({}, {})".format(r, c))
 
+    def __delitem__(self, key):
+        """Deleting rows or columns from a Tabel.
+
+        Deleting rows or columns can be done using the del keyword. 
+
+
+        Arguments:
+
+            key (int, list of ints, slice or string):
+                
+                If the key is a single integer, a list of integers or a slice object, then
+                the specified rows will be removed from the Tabel.
+                
+                If the key is a single string, then the specified column will be removed 
+                from the Tabel.
+
+        Returns:
+
+            nothing, change in-place.
+            
+        Raises:
+
+            IndexError:
+                When key is an integer or list of integers that references an invalid row. 
+                
+                Note that no exception is thrown if key is a slice object that refers to one
+                or more invalid rows.
+                
+            ValueError:
+                When key is a string that references an invalid column.
+            
+        Notes:
+            
+            Because Tabel stores data by columns, this operation requires creating new
+            numpy arrays for all columns in the Tabel.
+
+            Examples:
+
+        >>> tbl
+           Height |   Married
+        ----------+-----------
+             1.82 |         0
+             1.65 |         0
+             2.15 |         1
+        3 rows ['<f8', '|b1']
+
+        >>> del tbl[0]
+        >>> tbl
+           Height |   Married
+        ----------+-----------
+             1.65 |         0
+             2.15 |         1
+        2 rows ['<f8', '|b1']
+        >>> del tbl[0:2]
+        >>> tbl
+           Height |   Married
+        ----------+-----------
+        0 rows ['<f8', '|b1']
+        >>> del tbl['Married']
+        >>> tbl
+        
+        """
+
+        # If we are passed a string, we try to delete a column with that name
+        if isstring(key):
+            c = self.columns.index(key)
+            self.columns.pop(c)
+            self.data.pop(c)            
+        else: # otherwise try to delete rows using numpy.delete()
+            for i in range(len(self.data)):
+                self.data[i] = np.delete(self.data[i], key)
+        return
+        
     def __len__(self):
         if self.data:
             return max([len(dt) for dt in self.data])
