@@ -658,15 +658,17 @@ class Tabel(HashJoinMixin):
         ----------+-----------
              1.65 |         0
              2.15 |         1
-        2 rows ['<f8', '|b1']
+        2 rows
         >>> del tbl[0:2]
         >>> tbl
            Height |   Married
         ----------+-----------
-        0 rows ['<f8', '|b1']
+        0 rows
         >>> del tbl['Married']
         >>> tbl
-        
+           Height 
+        -----------
+        0 rows
         """
 
         # If we are passed a string, we try to delete a column with that name
