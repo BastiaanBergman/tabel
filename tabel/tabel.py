@@ -309,10 +309,12 @@ class Tabel(HashJoinMixin):
                 or a slice object. c can be a single integer or string, a
                 boolean array, an integer or string itereable or a slice object.
 
-            key (int, string) :
-                When only a single int or string is supplied it is considered to
-                point to a whole single column or a whole single row (in that
-                order).
+            key (int or string) :
+                When only a single int is supplied, it is considered to
+                point to a whole single row.
+                
+                When only a single string is supplied, it is considered to
+                point to a whole single column.                
 
         Returns:
 
@@ -454,11 +456,14 @@ class Tabel(HashJoinMixin):
                 a tuple of (r, c) with r a single integer adressing the row and
                 c a single integer or string addressing the column of the
                 element to be changed.
-
-            key (int, string):
-                When only a single int or string is supplied it is considered to
-                point to a whole single column or a whole single row (in that
-                order).
+                
+            key (int or string):                
+                When only a single int is supplied, it is considered to
+                point to a whole single row.
+                
+                When only a single string is supplied, it is considered to
+                point to a whole single column.                
+                
 
             value (object):
                 The type the value needs to have depends on the key provided.
