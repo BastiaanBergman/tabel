@@ -611,7 +611,6 @@ class Tabel(HashJoinMixin):
 
         Deleting rows or columns can be done using the del keyword.
 
-
         Arguments:
             key (int, list of ints, slice or string):
 

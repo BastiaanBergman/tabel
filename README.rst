@@ -237,6 +237,10 @@ Resources & getting help
 
 Stable releases
 ================
+* tabel 1.2.3
+
+  * Added __delitem__ feature to delete row(s) or a column.
+
 * tabel 1.2.2
 
   * Added argument to save and read methods for csv and gz formats to specify
