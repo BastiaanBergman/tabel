@@ -40,7 +40,7 @@ def add_empty_row(tbl):
             empty_row.append(tbl.join_fill_value['integer'])
     try:
         tbl.row_append(empty_row)
-    except ValueError as ve:
+    except ValueError:
         raise ValueError("Outer join cannot be fullfilled when there are other ",
                          "columns than float, string or integer because Tabel ",
                          "doesn't know what to fill it up with.")

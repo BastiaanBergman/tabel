@@ -210,7 +210,7 @@ column.</td>
 <h2>read_tabel<a class="headerlink" href="#read-tabel" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tabel.read_tabel">
-<code class="descclassname">tabel.</code><code class="descname">read_tabel</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.read_tabel" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tabel.</code><code class="descname">read_tabel</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt='auto'</em>, <em>header=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.read_tabel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read data from disk</p>
 <p>Read data from disk and return a Tabel object.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -220,6 +220,8 @@ column.</td>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> (<em>str</em>) – filename sring, including path and extension.</li>
 <li><strong>fmt</strong> (<em>str</em>) – format specifier, supports: ‘csv’, ‘npz’, ‘gz’.</li>
+<li><strong>header</strong> (<em>bool</em>) – whether to expect a header (True) or not (False) or try to sniff
+(None), only used for csv and gz</li>
 </ul>
 </td>
 </tr>

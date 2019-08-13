@@ -408,6 +408,13 @@ will try to monitor for it.</li>
 <div class="section" id="stable-releases">
 <h1>Stable releases<a class="headerlink" href="#stable-releases" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
+<li>tabel 1.2.2<ul>
+<li>Added argument to save and read methods for csv and gz formats to specify
+whether or not to write/read a header with the column names. For reading
+header can be left to None for automatic sniffing of the header. Default is
+True for both read and save methods.</li>
+</ul>
+</li>
 <li>tabel 1.2.1<ul>
 <li>Removed unicode characters from description to fix pip install
 <cite>issue &lt;https://github.com/BastiaanBergman/tabel/issues/6#issue-440282452&gt;</cite>.</li>

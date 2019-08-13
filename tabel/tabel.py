@@ -281,7 +281,7 @@ class Tabel(HashJoinMixin):
 
     def _column_indices(self, c):
         # Slice or ndarray of indices or booleans?
-        if isinstance(c, slice) or isinstance(c, np.ndarray):
+        if isinstance(c, (slice, np.ndarray)):
             try:
                 c = np.arange(len(self.columns))[c]
                 assert np.all(c < len(self.columns))
@@ -802,7 +802,7 @@ class Tabel(HashJoinMixin):
         for i in range(len(self.columns)):
             self.data[i] = self.data[i][ind]
 
-    def save(self, filename, fmt='auto'):
+    def save(self, filename, fmt='auto', header=True):
         """Save to file
 
         Saves the Tabel data including a header with the column names to a file
@@ -826,6 +826,10 @@ class Tabel(HashJoinMixin):
                 ``npz`` :
                     Write to compressed `numpy` native binary format.
 
+            header (bool) :
+                whether to write a header line with the column names, only used for
+                csv and gz
+
         Returns:
             Nothing.
         """
@@ -834,11 +838,11 @@ class Tabel(HashJoinMixin):
 
         if fmt == 'csv':
             with open(filename, 'w') as f:
-                self._write_csv(f)
+                self._write_csv(f, header)
 
         elif fmt == "gz":
             with gzip.open(filename, 'wt') as f:
-                self._write_csv(f)
+                self._write_csv(f, header)
 
         elif fmt == 'npz':
             np.savez_compressed(filename, **{k: v for k, v in zip(self.columns, self.data)})
@@ -846,19 +850,22 @@ class Tabel(HashJoinMixin):
         else:
             raise ValueError("Only formats supported: csv, npz, gz")
 
-    def _write_csv(self, f):
+    def _write_csv(self, f, header=True):
         """Writing csv filesself.
 
         Arguments:
             f (object) :
                 file handle
+            header (bool) :
+                whether to write the columns header
         """
         writer = csv.writer(f)
-        writer.writerow(self.columns)
+        if header:
+            writer.writerow(self.columns)
         writer.writerows(zip(*self.data))
 
 
-def read_tabel(filename, fmt='auto'):
+def read_tabel(filename, fmt='auto', header=True):
     """Read data from disk
 
     Read data from disk and return a Tabel object.
@@ -868,6 +875,9 @@ def read_tabel(filename, fmt='auto'):
             filename sring, including path and extension.
         fmt (str) :
             format specifier, supports: 'csv', 'npz', 'gz'.
+        header (bool) :
+            whether to expect a header (True) or not (False) or try to sniff
+            (None), only used for csv and gz
 
     Returns:
         Tabel object containing the data.
@@ -876,10 +886,10 @@ def read_tabel(filename, fmt='auto'):
         fmt = os.path.splitext(filename)[1].replace('.', '')
     if fmt == "csv":
         with open(filename, 'r') as f:      # , newline=""
-            data = _read_csv(f)
+            data = _read_csv(f, header)
     elif fmt == "gz":
         with gzip.open(filename, 'rt') as f:
-            data = _read_csv(f)
+            data = _read_csv(f, header)
     elif fmt == "npz":
         reader = np.load(filename)
         columns = reader.keys()
@@ -890,23 +900,24 @@ def read_tabel(filename, fmt='auto'):
     return Tabel(**data)
 
 
-def _read_csv(f):
+def _read_csv(f, header=True):
     """Reading csv.
     Arguments:
         f (object) :
             filehandle to ope file
+        header (bool, None) :
+            whether to expect a header (True) or not (False) or try to sniff
+            (None), only used for csv and gz
 
     returns (dict) :
         dictionary containing the data
     """
-    sniff_size = 2**20 - 1
-    dialect = csv.Sniffer().sniff(f.read(sniff_size))
-    f.seek(0)
-    has_header = csv.Sniffer().has_header(f.read(sniff_size))
-    f.seek(0)
+    dialect, sniff_header = _csv_sniff(f)
     reader = csv.reader(f, dialect)
     columns = next(reader)
-    if not has_header:
+    if header is None:
+        header = sniff_header
+    if not header:
         columns = [str(i) for i in range(len(columns))]
         f.seek(0)
     datastruct = [[] for i in range(len(columns))]
@@ -924,3 +935,19 @@ def _read_csv(f):
             break
     data = dict(datastruct=datastruct, columns=columns)
     return data
+
+
+def _csv_sniff(f):
+    """
+    Sniff using csv module whether or not a csv file (csv or gz) has a header.
+
+    Arguments:
+        f (filehandle) :
+            filehandle of the file to be read
+    """
+    sniff_size = 2**20 - 1
+    dialect = csv.Sniffer().sniff(f.read(sniff_size))
+    f.seek(0)
+    has_header = csv.Sniffer().has_header(f.read(sniff_size))
+    f.seek(0)
+    return dialect, has_header
