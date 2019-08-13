@@ -27,10 +27,11 @@ def tbls():
             Tabel(),
             Tabel([1,2,3]),
             Tabel({'a':range(10),'b':range(10)}),
+            Tabel({'a':range(10),'b':list(map(str, range(10)))}),
             Tabel([range(10),range(10),range(10)]),
             Tabel(np.array([np.arange(10),np.arange(10,20)])),
             Tabel({'a':12,'b':13}),
-            Tabel(pd.DataFrame({'a':[12]*6, 'b':np.arange(6), 'c':list(map(str, range(6)))})),
+            Tabel(pd.DataFrame({'a':[12]*6, 'b':np.arange(6), 'c':range(6)})),
             Tabel({'a':[3,4,5], 'b':1}),
             Tabel({'a':1, 'b':[3,4,5]}),
             Tabel({'aa':[1,1,1], 'b':[3,4,5]}),
@@ -186,22 +187,23 @@ class TestSetter(object):
 
 
 class TestSaveNRead(object):
-    def test_save_and_read(self, tbls, tmpdir):
-        for tbl in tbls:
-            if len(tbl) > 0:
-                tbl.save(os.path.join(str(tmpdir), "test.csv"), fmt="csv")
-                tbl_b = read_tabel(os.path.join(str(tmpdir), "test.csv"), fmt="csv")
-                assert tbl_b.valid
-                # tbl.save(tmpdir+"/test.gz", fmt="gz")
-                # tbl_b = read_tabel(tmpdir+"/test.gz", fmt="gz")
-                # assert tbl_b.valid
-                tbl.save(os.path.join(str(tmpdir), "test.npz"), fmt="npz")
-                tbl_b = read_tabel(os.path.join(str(tmpdir), "test.npz"), fmt="npz")
-                assert set(tbl.columns) == set(tbl_b.columns)
-                for c in tbl.columns:
-                    assert np.all(tbl[:,c] == tbl_b[:,c])
+    def test_save_n_read(self, tbls, tmpdir):
+        for header in [True, False]:
+            for fmt in ['csv', 'gz', 'npz']:
+                for tbl in tbls:
+                    if len(tbl) > 0:
+                        fn = os.path.join(str(tmpdir), "test."+fmt)
+                        tbl.save(fn, header=header)
+                        tbl_r = read_tabel(fn, header=header)
+                        assert (set(tbl_r.columns) == set(tbl.columns)) or (not header), (tbl, tbl_r)
+                        assert len(tbl_r) == len(tbl), (tbl, tbl_r)
+                        assert tbl_r.valid, (tbl, tbl_r)
 
-
+                        if not tbl_r.columns[0].isdigit() and len(tbl)>2:
+                            # header sniffer should work
+                            tbl_r = read_tabel(fn, header=None)
+                            assert set(tbl_r.columns) == set(tbl.columns), (tbl, tbl_r)
+                            assert len(tbl_r) == len(tbl), (tbl, tbl_r)
 
 class TestGroupBy(object):
     def test_group_by(self):
@@ -306,3 +308,36 @@ class TestPandasBackAndForth(object):
         df = pd.DataFrame(tbl.dict)
         for k in data.keys():
             assert np.all(df['a'] == data['a'])
+
+
+class TestDelItem(object):
+
+    def test_del_row_int(self):
+        tbl1 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        tbl2 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})        
+        del tbl1[0]
+        assert len(tbl1) == 3
+        for i in range(len(tbl1):
+            assert tbl1[i] == tbl2[i+1]
+            
+        del tbl1[-1]
+        assert len(tbl1) == 2
+        assert tbl1[0] == tbl2[1]
+        assert tbl1[1] == tbl2[2]
+
+    def test_del_row_slice(self):
+        tbl1 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        tbl2 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})        
+        del tbl1[1:3]
+        assert len(tbl1) == 2
+        assert tbl1[0] == tbl2[0]
+        assert tbl1[1] == tbl2[3]        
+            
+
+    def test_del_col(self):
+        tbl1 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        tbl2 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})        
+        del tbl1['b']
+        assert tbl1.columns == ['a','c']
+        assert all( tbl1['a'] == tbl2['a'] )
+        assert all( tbl1['c'] == tbl2['c'] )
