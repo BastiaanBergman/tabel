@@ -312,9 +312,9 @@ class Tabel(HashJoinMixin):
             key (int or string) :
                 When only a single int is supplied, it is considered to
                 point to a whole single row.
-                
+
                 When only a single string is supplied, it is considered to
-                point to a whole single column.                
+                point to a whole single column.
 
         Returns:
 
@@ -456,14 +456,14 @@ class Tabel(HashJoinMixin):
                 a tuple of (r, c) with r a single integer adressing the row and
                 c a single integer or string addressing the column of the
                 element to be changed.
-                
-            key (int or string):                
+
+            key (int or string):
                 When only a single int is supplied, it is considered to
                 point to a whole single row.
-                
+
                 When only a single string is supplied, it is considered to
-                point to a whole single column.                
-                
+                point to a whole single column.
+
 
             value (object):
                 The type the value needs to have depends on the key provided.
@@ -609,38 +609,38 @@ class Tabel(HashJoinMixin):
     def __delitem__(self, key):
         """Deleting rows or columns from a Tabel.
 
-        Deleting rows or columns can be done using the del keyword. 
+        Deleting rows or columns can be done using the del keyword.
 
 
         Arguments:
-
             key (int, list of ints, slice or string):
-                
-                If the key is a single integer, a list of integers or a slice object, then
-                the specified rows will be removed from the Tabel.
-                
-                If the key is a single string, then the specified column will be removed 
-                from the Tabel.
+
+                If the key is a single integer, a list of integers or a slice
+                object, then the specified rows will be removed from the Tabel.
+
+                If the key is a single string, then the specified column will be
+                removed from the Tabel.
 
         Returns:
 
             nothing, change in-place.
-            
+
         Raises:
 
             IndexError:
-                When key is an integer or list of integers that references an invalid row. 
-                
-                Note that no exception is thrown if key is a slice object that refers to one
-                or more invalid rows.
-                
+                When key is an integer or list of integers that references an
+                invalid row.
+
+                Note that no exception is thrown if key is a slice object that
+                refers to one or more invalid rows.
+
             ValueError:
                 When key is a string that references an invalid column.
-            
+
         Notes:
-            
-            Because Tabel stores data by columns, this operation requires creating new
-            numpy arrays for all columns in the Tabel.
+
+            Because Tabel stores data by columns, this operation requires
+            creating new numpy arrays for all columns in the Tabel.
 
             Examples:
 
@@ -666,7 +666,7 @@ class Tabel(HashJoinMixin):
         0 rows
         >>> del tbl['Married']
         >>> tbl
-           Height 
+           Height
         -----------
         0 rows
         """
@@ -675,12 +675,11 @@ class Tabel(HashJoinMixin):
         if isstring(key):
             c = self.columns.index(key)
             self.columns.pop(c)
-            self.data.pop(c)            
+            self.data.pop(c)
         else: # otherwise try to delete rows using numpy.delete()
             for i in range(len(self.data)):
                 self.data[i] = np.delete(self.data[i], key)
-        return
-        
+
     def __len__(self):
         if self.data:
             return max([len(dt) for dt in self.data])
