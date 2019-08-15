@@ -101,6 +101,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">class Tabel</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#getter">getter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setter">setter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delitem">delitem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#repr">repr</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#append">append</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#row-append">row_append</a></li>
@@ -268,10 +269,12 @@ conventions.</p>
 <dd>r can be a single integer, a boolean array, an integer itereable
 or a slice object. c can be a single integer or string, a
 boolean array, an integer or string itereable or a slice object.</dd>
-<dt>key (int, string) :</dt>
-<dd>When only a single int or string is supplied it is considered to
-point to a whole single column or a whole single row (in that
-order).</dd>
+<dt>key (int or string) :</dt>
+<dd><p class="first">When only a single int is supplied, it is considered to
+point to a whole single row.</p>
+<p class="last">When only a single string is supplied, it is considered to
+point to a whole single column.</p>
+</dd>
 </dl>
 </div></blockquote>
 <p>Returns:</p>
@@ -353,7 +356,7 @@ add new columns.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>key</strong> (<em>int</em><em>, </em><em>string</em>) – <p>r can be a single integer, a boolean array, an integer
+<li><strong>key</strong> (<em>int</em><em> or </em><em>string</em>) – <p>r can be a single integer, a boolean array, an integer
 itereable or a slice object.</p>
 <p>c can be a single integer or string, a boolean array, an integer
 or string itereable or a slice object.</p>
@@ -362,9 +365,11 @@ a tuple of (r, c) with r a single integer adressing the row and
 c a single integer or string addressing the column of the
 element to be changed.</p>
 </li>
-<li><strong>key</strong> – When only a single int or string is supplied it is considered to
-point to a whole single column or a whole single row (in that
-order).</li>
+<li><strong>key</strong> – <p>When only a single int is supplied, it is considered to
+point to a whole single row.</p>
+<p>When only a single string is supplied, it is considered to
+point to a whole single column.</p>
+</li>
 <li><strong>value</strong> (<em>object</em>) – <p>The type the value needs to have depends on the key provided.</p>
 <dl class="docutils">
 <dt>element:</dt>
@@ -423,6 +428,71 @@ than the whole column is replaced with the column provided.</p>
 </div>
 <p class="last">Note how in the first case the type of the name column stays “&lt;U8”
 while seccond case the type of the Name column changes to “&lt;i8”.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="delitem">
+<h2>delitem<a class="headerlink" href="#delitem" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tabel.Tabel.__delitem__">
+<code class="descclassname">Tabel.</code><code class="descname">__delitem__</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#tabel.Tabel.__delitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deleting rows or columns from a Tabel.</p>
+<p>Deleting rows or columns can be done using the del keyword.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> (<em>int</em><em>, </em><em>list of ints</em><em>, </em><em>slice</em><em> or </em><em>string</em>) – <p>If the key is a single integer, a list of integers or a slice
+object, then the specified rows will be removed from the Tabel.</p>
+<p>If the key is a single string, then the specified column will be
+removed from the Tabel.</p>
+</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">nothing, change in-place.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last">
+<li><p class="first"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code> – When key is an integer or list of integers that references an
+invalid row.</p>
+<p>Note that no exception is thrown if key is a slice object that
+refers to one or more invalid rows.</p>
+</li>
+<li><p class="first"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – When key is a string that references an invalid column.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-notes admonition">
+<p class="first admonition-title">Notes</p>
+<p>Because Tabel stores data by columns, this operation requires
+creating new numpy arrays for all columns in the Tabel.</p>
+<p class="last">Examples:</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span> <span class="o">=</span> <span class="n">Tabel</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;Joe&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.82</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span> <span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">,</span> <span class="s2">&quot;Married&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">tbl</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">tbl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go">   Height |   Married</span>
+<span class="go">----------+-----------</span>
+<span class="go">     1.65 |         0</span>
+<span class="go">     2.15 |         1</span>
+<span class="go">2 rows [&#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">tbl</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go"> Height   | Married</span>
+<span class="go">----------+-----------</span>
+<span class="go">0 rows [&#39;&lt;f8&#39;, &#39;|b1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">tbl</span><span class="p">[</span><span class="s1">&#39;Married&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tbl</span>
+<span class="go"> Height</span>
+<span class="go">----------</span>
+<span class="go">0 rows [&#39;&lt;f8&#39;]</span>
+</pre></div>
 </div>
 </dd></dl>
 

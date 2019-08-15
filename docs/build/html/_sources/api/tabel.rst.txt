@@ -16,6 +16,12 @@ setter
 .. automethod:: tabel.Tabel.__setitem__
 
 
+delitem
+-------
+
+.. automethod:: tabel.Tabel.__delitem__
+
+
 repr
 ----
 

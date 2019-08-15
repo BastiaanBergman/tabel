@@ -642,32 +642,26 @@ class Tabel(HashJoinMixin):
             creating new numpy arrays for all columns in the Tabel.
 
             Examples:
-
-        >>> tbl
-           Height |   Married
-        ----------+-----------
-             1.82 |         0
-             1.65 |         0
-             2.15 |         1
-        3 rows ['<f8', '|b1']
-
+        >>> tbl = Tabel( [ ["John", "Joe", "Jane"], [1.82, 1.65, 2.15],
+        ...              [False, False, True] ], columns = ["Name", "Height", "Married"])
+        >>> del tbl["Name"]
         >>> del tbl[0]
         >>> tbl
            Height |   Married
         ----------+-----------
              1.65 |         0
              2.15 |         1
-        2 rows
+        2 rows ['<f8', '|b1']
         >>> del tbl[0:2]
         >>> tbl
-           Height |   Married
+         Height   | Married
         ----------+-----------
-        0 rows
+        0 rows ['<f8', '|b1']
         >>> del tbl['Married']
         >>> tbl
-           Height
-        -----------
-        0 rows
+         Height
+        ----------
+        0 rows ['<f8']
         """
 
         # If we are passed a string, we try to delete a column with that name

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: tabel
-Version: 1.2.2
+Version: 1.2.3
 Summary: Lightweight, intuitive and fast data-tables.
 Home-page: https://github.com/BastiaanBergman/tabel
 Author: Bastiaan Bergman
@@ -247,6 +247,10 @@ Description: About Tabel
         
         Stable releases
         ================
+        * tabel 1.2.3
+        
+          * Added __delitem__ feature to delete row(s) or a column.
+        
         * tabel 1.2.2
         
           * Added argument to save and read methods for csv and gz formats to specify

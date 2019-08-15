@@ -308,3 +308,35 @@ class TestPandasBackAndForth(object):
         df = pd.DataFrame(tbl.dict)
         for k in data.keys():
             assert np.all(df['a'] == data['a'])
+
+
+class TestDelItem(object):
+    def test_del_row_int(self):
+        tbl1 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        tbl2 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        del tbl1[0]
+        assert len(tbl1) == 3
+        for i in range(len(tbl1)):
+            assert tbl1[i] == tbl2[i+1]
+
+        del tbl1[-1]
+        assert len(tbl1) == 2
+        assert tbl1[0] == tbl2[1]
+        assert tbl1[1] == tbl2[2]
+
+    def test_del_row_slice(self):
+        tbl1 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        tbl2 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        del tbl1[1:3]
+        assert len(tbl1) == 2
+        assert tbl1[0] == tbl2[0]
+        assert tbl1[1] == tbl2[3]
+
+
+    def test_del_col(self):
+        tbl1 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        tbl2 = Tabel({"a":list(range(2,6)), "b": ['1','2'] *2, "c":[1.1,2.2]*2})
+        del tbl1['b']
+        assert tbl1.columns == ['a','c']
+        assert all( tbl1['a'] == tbl2['a'] )
+        assert all( tbl1['c'] == tbl2['c'] )
