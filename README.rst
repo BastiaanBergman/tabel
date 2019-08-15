@@ -290,7 +290,18 @@ Tabel is perfect already, no more contributions needed. Just kidding!
 
 See the repository for filing issues and proposing enhancements.
 
+git:
+ - Using master as the development branch
+ - Every new version is branched of of master (after its finished) into its own
+   "v1.2.3" named branch. Subsequent version specific
+   fixes can be done in the version branches.
+
 I'm using pytest, pylint, doctest, sphynx and setuptools.
+
+ - git ::
+
+    git checkout master
+    git pull
 
  - pytest ::
 
@@ -319,6 +330,15 @@ I'm using pytest, pylint, doctest, sphynx and setuptools.
 
     python setup.py sdist bdist_wheel
     twine upload dist/tabel-1.1.0.*
+
+- git ::
+
+    git add .
+    git commit -m
+    git push
+    git checkout v1.2.3 -b
+    git push --set-upstream origin v1.2.3
+
 
 
 Contributors
