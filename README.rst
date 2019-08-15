@@ -292,10 +292,12 @@ See the repository for filing issues and proposing enhancements.
 
 git:
 ----
- * Using master as the development branch
- * Every new version is branched of of master (after its finished) into its own
-   "v1.2.3" named branch. Subsequent version specific
-   fixes can be done in the version branches.
+
+* Using master as the development branch
+* Every new version is branched of of master (after its finished) into its own
+  "v1.2.3" named branch. Subsequent version specific fixes can be done in the
+  version branches.
+
 
 I'm using pytest, pylint, doctest, sphynx and setuptools.
 
