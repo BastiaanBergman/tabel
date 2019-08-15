@@ -291,8 +291,9 @@ Tabel is perfect already, no more contributions needed. Just kidding!
 See the repository for filing issues and proposing enhancements.
 
 git:
- - Using master as the development branch
- - Every new version is branched of of master (after its finished) into its own
+----
+ * Using master as the development branch
+ * Every new version is branched of of master (after its finished) into its own
    "v1.2.3" named branch. Subsequent version specific
    fixes can be done in the version branches.
 
