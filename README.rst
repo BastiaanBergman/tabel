@@ -334,7 +334,7 @@ I'm using pytest, pylint, doctest, sphynx and setuptools.
     python setup.py sdist bdist_wheel
     twine upload dist/tabel-1.1.0.*
 
-- git ::
+ - git ::
 
     git add .
     git commit -m
